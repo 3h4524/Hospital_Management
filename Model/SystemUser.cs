@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccess;
+namespace Model;
 
 public partial class SystemUser
 {

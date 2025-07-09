@@ -1,4 +1,4 @@
-﻿namespace Hospital_Management
+﻿namespace Service
 {
     public class Class1
     {

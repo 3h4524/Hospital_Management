@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\View\\View.csproj": {}
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\View\\View.csproj": {}
   },
   "projects": {
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\View\\View.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\View\\View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\View\\View.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\View\\View.csproj",
         "projectName": "View",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\View\\View.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\View\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\View\\View.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\View\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
