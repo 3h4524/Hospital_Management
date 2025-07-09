@@ -7,9 +7,7 @@ public partial class Timekeeping
 {
     public int TimeKeepingId { get; set; }
 
-    public int? DoctorId { get; set; }
-
-    public int? SystemUserId { get; set; }
+    public int UserId { get; set; }
 
     public DateOnly WorkDate { get; set; }
 
@@ -21,7 +19,5 @@ public partial class Timekeeping
 
     public string? Note { get; set; }
 
-    public virtual Doctor? Doctor { get; set; }
-
-    public virtual SystemUser? SystemUser { get; set; }
+    public virtual SystemUser User { get; set; } = null!;
 }

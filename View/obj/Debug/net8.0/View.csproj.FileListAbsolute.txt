@@ -5,6 +5,7 @@ D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.GeneratedM
 D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.AssemblyInfoInputs.cache
 D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.AssemblyInfo.cs
 D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.csproj.CoreCompileInputs.cache
+D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.sourcelink.json
 D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.dll
 D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\refint\View.dll
 D:\FPT\Semester 5\PRN1\Hospital_Management\View\obj\Debug\net8.0\View.pdb

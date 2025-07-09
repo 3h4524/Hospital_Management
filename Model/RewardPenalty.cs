@@ -7,9 +7,7 @@ public partial class RewardPenalty
 {
     public int RpId { get; set; }
 
-    public int? DoctorId { get; set; }
-
-    public int? SystemUserId { get; set; }
+    public int UserId { get; set; }
 
     public DateOnly Rpdate { get; set; }
 
@@ -19,7 +17,5 @@ public partial class RewardPenalty
 
     public string? Reason { get; set; }
 
-    public virtual Doctor? Doctor { get; set; }
-
-    public virtual SystemUser? SystemUser { get; set; }
+    public virtual SystemUser User { get; set; } = null!;
 }

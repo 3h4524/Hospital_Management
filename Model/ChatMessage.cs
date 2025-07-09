@@ -20,4 +20,8 @@ public partial class ChatMessage
     public DateTime? SentAt { get; set; }
 
     public bool? IsRead { get; set; }
+
+    public virtual SystemUser Receiver { get; set; } = null!;
+
+    public virtual SystemUser Sender { get; set; } = null!;
 }

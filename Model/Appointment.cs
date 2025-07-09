@@ -19,9 +19,9 @@ public partial class Appointment
 
     public string? Status { get; set; }
 
-    public virtual Doctor Doctor { get; set; } = null!;
+    public virtual SystemUser Doctor { get; set; } = null!;
 
     public virtual ICollection<MedicalRecord> MedicalRecords { get; set; } = new List<MedicalRecord>();
 
-    public virtual Patient Patient { get; set; } = null!;
+    public virtual SystemUser Patient { get; set; } = null!;
 }

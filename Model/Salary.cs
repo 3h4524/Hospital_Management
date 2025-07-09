@@ -7,7 +7,7 @@ public partial class Salary
 {
     public int SalaryId { get; set; }
 
-    public int DoctorId { get; set; }
+    public int UserId { get; set; }
 
     public int Month { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Salary
 
     public DateTime? GeneratedAt { get; set; }
 
-    public virtual Doctor Doctor { get; set; } = null!;
+    public virtual SystemUser User { get; set; } = null!;
 }
