@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccess;
+namespace Model;
 
 public partial class DoctorProfile
 {
@@ -9,11 +9,7 @@ public partial class DoctorProfile
 
     public string? Specialization { get; set; }
 
-    public int? Dependencies { get; set; }
-
     public DateOnly? JoinDate { get; set; }
-
-    public decimal? BaseSalary { get; set; }
 
     public virtual SystemUser User { get; set; } = null!;
 }

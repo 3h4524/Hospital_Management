@@ -1,8 +1,3 @@
-D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp.csproj.AssemblyReference.cache
-D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\MainWindow.g.cs
-D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\App.g.cs
-D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp_MarkupCompile.cache
-D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp_MarkupCompile.lref
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\WpfApp.exe
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\WpfApp.deps.json
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\WpfApp.runtimeconfig.json
@@ -115,6 +110,11 @@ D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\DataA
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\Model.dll
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\DataAccess.pdb
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\Model.pdb
+D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp.csproj.AssemblyReference.cache
+D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\App.g.cs
+D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp_MarkupCompile.cache
+D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp_MarkupCompile.lref
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\MainWindow.baml
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp.g.resources
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\WpfApp.GeneratedMSBuildEditorConfig.editorconfig
