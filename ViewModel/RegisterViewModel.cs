@@ -39,7 +39,7 @@ namespace ViewModel
             get => _password;
             set
             {
-                _password = value;  
+                _password = value;
                 OnPropertyChanged();
             }
         }
@@ -80,7 +80,7 @@ namespace ViewModel
                 }
 
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Message = $"Error: {ex.Message}";
             }

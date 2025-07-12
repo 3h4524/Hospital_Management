@@ -1,10 +1,7 @@
 ﻿<UserControl x:Class="View.LoginView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:View"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d">
+             xmlns:local="clr-namespace:View">
     <Border Width="320" Height="420" Background="White" CornerRadius="8" Padding="25">
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
@@ -17,6 +14,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Email" HorizontalAlignment="Left" Grid.Row="0" Margin="0,15"/>
                 <TextBox Grid.Row="1" Margin="0,5" Width="255" BorderThickness="0,0,0,1" HorizontalAlignment="Left"
@@ -24,24 +22,14 @@
                 <TextBlock Text="Password" Grid.Row="2" HorizontalAlignment="Left" Margin="0,15"/>
                 <PasswordBox x:Name="PasswordBox" Grid.Row="3" Width="255" Margin="0,5" BorderThickness="0,0,0,1"
                              PasswordChanged="PwdChanged"/>
+                <TextBlock Grid.Row="4" Text="{Binding Message}" Foreground="Red" Margin="0,10,0,0" TextWrapping="Wrap"/>
             </Grid>
-            <TextBlock Text="Forgot password?" Cursor="Hand" HorizontalAlignment="Right" TextDecorations="Underline">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDown">
-                        <i:InvokeCommandAction Command="{Binding GoForgotCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBlock>
+            <TextBlock Text="Forgot password?" Cursor="Hand" HorizontalAlignment="Right" TextDecorations="Underline"
+                       MouseDown="OnForgotPasswordClick"/>
             <Button Content="Login" Command="{Binding LoginCommand}" Background="Black" Foreground="White"
                     Height="36" Margin="0,30,0,10" Width="200"/>
             <TextBlock Text="Not a member? Sign up" Cursor="Hand" Margin="0,10,0,0" HorizontalAlignment="Center"
-                       TextDecorations="Underline">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDown">
-                        <i:InvokeCommandAction Command="{Binding GoRegisterCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBlock>
+                       TextDecorations="Underline" MouseDown="OnRegisterClick"/>
         </StackPanel>
     </Border>
 </UserControl>

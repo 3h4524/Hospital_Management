@@ -8,35 +8,30 @@ namespace ViewModel
     public class LoginViewModel : ViewModelBase
     {
         private readonly AuthenticationService _authService;
-        private readonly MainViewModel _main;
-
-        private readonly INavigateService _navigateService;  
-
-        
-        public ICommand LoginCommand { get; }
-        public ICommand GoRegisterCommand { get; }
-        public ICommand GoForgotCommand { get; }
-
+        private readonly INavigateService _navigateService;
         private string _email = "";
         private string _password = "";
         private string _message = "";
+        private bool _isLoggingIn;
 
         public LoginViewModel(AuthenticationService authenticationService, INavigateService navigateService)
         {
-            _authService = authenticationService;
-            _navigateService = navigateService;
-            LoginCommand = new RelayCommand(Login, CanLogin);
-            GoRegisterCommand = new RelayCommand(GoToRegister);
-            GoForgotCommand = new RelayCommand(GoToForgetPassword);
-
+            _authService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
+            _navigateService = navigateService ?? throw new ArgumentNullException(nameof(navigateService));
+            LoginCommand = new RelayCommand(async parameter => await Login(parameter), CanLogin);
+            GoRegisterCommand = new RelayCommand(GoToRegister, _ => !_isLoggingIn);
+            GoForgotCommand = new RelayCommand(GoToForgetPassword, _ => !_isLoggingIn);
         }
+
         public string Email
         {
             get => _email;
             set
             {
-                _email = value;
-                OnPropertyChanged();
+                if (SetProperty(ref _email, value))
+                {
+                    ((RelayCommand)LoginCommand).RaiseCanExecuteChanged();
+                }
             }
         }
 
@@ -45,46 +40,73 @@ namespace ViewModel
             get => _password;
             set
             {
-                _password = value;
-                OnPropertyChanged();
+                if (SetProperty(ref _password, value))
+                {
+                    ((RelayCommand)LoginCommand).RaiseCanExecuteChanged();
+                }
             }
         }
 
         public string Message
         {
             get => _message;
-            set
+            set => SetProperty(ref _message, value);
+        }
+
+        public bool IsLoggingIn
+        {
+            get => _isLoggingIn;
+            private set
             {
-                _message = value;
-                OnPropertyChanged();
+                if (SetProperty(ref _isLoggingIn, value))
+                {
+                    ((RelayCommand)LoginCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)GoRegisterCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)GoForgotCommand).RaiseCanExecuteChanged();
+                }
             }
         }
 
+        public ICommand LoginCommand { get; }
+        public ICommand GoRegisterCommand { get; }
+        public ICommand GoForgotCommand { get; }
 
-        private async void Login(object parameter)
+        private async Task Login(object parameter)
         {
+            if (IsLoggingIn) return; 
+            IsLoggingIn = true;
+            Message = string.Empty;
+
             try
             {
                 var user = await _authService.Login(Email, Password);
-                if(user != null)
+                if (user != null)
                 {
                     Message = "Login successful!";
-                } else
+                    // Optionally navigate to a dashboard view
+                    // _navigateService.NavigateTo<DashboardViewModel>();
+                }
+                else
                 {
-                    Message = "Invalid email or password";
+                    Message = "Invalid email or password.";
                 }
             }
             catch (Exception ex)
             {
                 Message = $"Error: {ex.Message}";
             }
+            finally
+            {
+                IsLoggingIn = false;
+            }
         }
 
         private bool CanLogin(object parameter)
         {
-            return !string.IsNullOrEmpty(Email) &&
-                    Email.Contains("@") && Email.Contains(".") &&
-                    !string.IsNullOrEmpty(Password);
+            return !IsLoggingIn &&
+                   !string.IsNullOrWhiteSpace(Email) &&
+                   Email.Contains("@") && Email.Contains(".") &&
+                   !string.IsNullOrWhiteSpace(Password);
         }
 
         private void GoToRegister(object parameter)

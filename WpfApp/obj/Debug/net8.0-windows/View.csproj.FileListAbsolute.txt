@@ -121,6 +121,7 @@ D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\Repos
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\Service.pdb
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\bin\Debug\net8.0-windows\Util.pdb
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\View.csproj.AssemblyReference.cache
+D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\App.baml
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\ForgetPasswordView.g.cs
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\LoginView.g.cs
 D:\FPT\Semester 5\PRN1\Hospital_Management\WpfApp\obj\Debug\net8.0-windows\MainWindow.g.cs

@@ -8,9 +8,9 @@ namespace ViewModel
 {
     public class NavigateService : INavigateService
     {
-        private readonly MainViewModel _mainViewModel;
+        private MainViewModel _mainViewModel { get; set; }
 
-        public NavigateService(MainViewModel mainViewModel)
+        public void SetNavigateService(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
         }

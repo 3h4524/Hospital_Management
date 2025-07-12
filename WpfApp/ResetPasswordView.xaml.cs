@@ -27,7 +27,7 @@ namespace View
 
         private void PwdChanged(object sender, RoutedEventArgs e)
         {
-            if(DataContext is ResetPasswordViewModel viewModel)
+            if (DataContext is ResetPasswordViewModel viewModel)
             {
                 viewModel.NewPassword = ((PasswordBox)sender).Password;
             }

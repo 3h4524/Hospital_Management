@@ -11,17 +11,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViewModel;
 
 namespace View
 {
-    /// <summary>
-    /// Interaction logic for ForgetPasswordView.xaml
-    /// </summary>
+
     public partial class ForgetPasswordView : UserControl
     {
         public ForgetPasswordView()
         {
             InitializeComponent();
+        }
+
+        private void BackToLogin(object sender, EventArgs e)
+        {
+            if(DataContext is ForgetPasswordViewModel vm)
+            {
+                vm.GoLoginCommand.Execute(null);
+            }
         }
     }
 }

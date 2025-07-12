@@ -10,6 +10,7 @@ using Model;
 using Repository;
 using BCrypt;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace Service
 {
@@ -55,9 +56,15 @@ namespace Service
 
         public async Task<bool> ForgetPassword(string email)
         {
+            Debug.WriteLine("Checking email for send code");
+
             var user = await _userRepository.FindByEmail(email);
-            if (user == null) 
+            if (user == null)
+            {
+                Debug.WriteLine("Email not found");
                 return false;
+            } 
+
 
             string resetCode = Guid.NewGuid().ToString("N").Substring(0, 8);
 
@@ -76,6 +83,8 @@ namespace Service
             string subject = "Reset Password Request";
             string body = $"Hello,\n\n Your password reset code is: {resetCode}\nThis code will expire in 10 minutes.\n\nRegards,\nHospital Support.";
             bool emailSend = _emailService.sendEmail(email, subject, body);
+
+            Debug.WriteLine("Reset code sent!");
             return emailSend;
         }
 

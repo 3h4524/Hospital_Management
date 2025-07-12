@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp"
+        xmlns:local="clr-namespace:View"
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:v="clr-namespace:View" 
     mc:Ignorable="d"
@@ -23,10 +23,6 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"/>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

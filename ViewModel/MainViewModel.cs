@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess;
+using Repository;
+using Service;
 
 
 namespace ViewModel
@@ -16,6 +19,7 @@ namespace ViewModel
         {
             _serviceProvider = serviceProvider;
             NavigateTo<LoginViewModel>();
+            
         }
 
         public ViewModelBase CurrentViewModel

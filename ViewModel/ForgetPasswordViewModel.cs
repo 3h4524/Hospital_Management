@@ -51,7 +51,8 @@ namespace ViewModel
             _navigationService.NavigateTo<LoginViewModel>();
         }
 
-        public async void ForgetPassword(object? parameter) {
+        public async void ForgetPassword(object? parameter)
+        {
             try
             {
                 bool success = await _authenticationService.ForgetPassword(Email);

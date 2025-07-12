@@ -81,7 +81,7 @@ namespace ViewModel
                     Message = "Invalid email or reset code";
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Message = $"Error: {ex.Message}";
             }
@@ -96,7 +96,8 @@ namespace ViewModel
 
         public void OnNavigateTo(object parameter)
         {
-            if (parameter is string email){
+            if (parameter is string email)
+            {
                 Email = email;
             }
         }
