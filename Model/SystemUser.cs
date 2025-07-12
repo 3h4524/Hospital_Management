@@ -38,4 +38,6 @@ public partial class SystemUser
     public virtual ICollection<Salary> Salaries { get; set; } = new List<Salary>();
 
     public virtual ICollection<Timekeeping> Timekeepings { get; set; } = new List<Timekeeping>();
+
+    public virtual ICollection<EmailResetPassword> EmailResetPasswords { get; set; } = new List<EmailResetPassword>();
 }

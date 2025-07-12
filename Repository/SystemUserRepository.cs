@@ -13,9 +13,14 @@ namespace Repository
     {   
         public SystemUserRepository(HospitalManagementContext context) : base(context){}
 
-        public async Task<SystemUser?> GetByUsernameAndPassword(string username, string password)
+        public async Task<bool> CheckExistedEmail(string email)
         {
-            return await _dbSet.FirstOrDefaultAsync(u => u.)
+            return await _dbSet.AnyAsync(x => x.Email == email);
+        }
+
+        public async Task<SystemUser?> FindByEmail(string email)
+        {
+            return await _dbSet.FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }

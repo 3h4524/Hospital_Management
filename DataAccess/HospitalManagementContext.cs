@@ -35,6 +35,7 @@ public partial class HospitalManagementContext : DbContext
     public virtual DbSet<SystemUser> SystemUsers { get; set; }
 
     public virtual DbSet<Timekeeping> Timekeepings { get; set; }
+    public virtual DbSet<EmailResetPassword> EmailResetPasswords { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -259,6 +260,38 @@ public partial class HospitalManagementContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Timekeeping_User");
         });
+
+
+        modelBuilder.Entity<EmailResetPassword>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_EmailResetPassword");
+
+            entity.Property(e => e.Id)
+                .HasDefaultValueSql("(newid())");
+
+            entity.Property(e => e.ResetCode)
+                .IsRequired()
+                .HasMaxLength(20);
+
+            entity.Property(e => e.ExpiredAt)
+                .IsRequired()
+                .HasColumnType("datetime");
+
+            entity.Property(e => e.IsUsed)
+                .HasDefaultValue(false);
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(e => e.User)
+                .WithMany(u => u.EmailResetPasswords)
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_EmailResetPassword_User");
+        });
+
+
 
         OnModelCreatingPartial(modelBuilder);
     }
