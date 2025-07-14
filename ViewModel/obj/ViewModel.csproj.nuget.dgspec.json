@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\ViewModel\\ViewModel.csproj": {}
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\ViewModel\\ViewModel.csproj": {}
   },
   "projects": {
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj"
               }
             }
           }
@@ -91,20 +91,20 @@
         }
       }
     },
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Hospital_Management\\Service.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Hospital_Management\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Hospital_Management\\Service.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Hospital_Management\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Hospital_Management\\Service.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Hospital_Management\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Hospital_Management\\Service.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Hospital_Management\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -119,17 +119,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj"
               },
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj"
               },
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Repository\\Repository.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Repository\\Repository.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Repository\\Repository.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Repository\\Repository.csproj"
               },
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Util\\Util.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Util\\Util.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Util\\Util.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Util\\Util.csproj"
               }
             }
           }
@@ -175,20 +175,20 @@
         }
       }
     },
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -240,20 +240,20 @@
         }
       }
     },
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Repository\\Repository.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Repository\\Repository.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Repository\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -268,11 +268,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\DataAccess\\DataAccess.csproj"
               },
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj"
               }
             }
           }
@@ -312,20 +312,20 @@
         }
       }
     },
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Util\\Util.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Util\\Util.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Util\\Util.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Util\\Util.csproj",
         "projectName": "Util",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Util\\Util.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Util\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Util\\Util.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Util\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -340,8 +340,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Model\\Model.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Model\\Model.csproj"
               }
             }
           }
@@ -381,20 +381,20 @@
         }
       }
     },
-    "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\ViewModel\\ViewModel.csproj": {
+    "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\ViewModel\\ViewModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\ViewModel\\ViewModel.csproj",
+        "projectUniqueName": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\ViewModel\\ViewModel.csproj",
         "projectName": "ViewModel",
-        "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\ViewModel\\ViewModel.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\ViewModel\\obj\\",
+        "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\ViewModel\\ViewModel.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\ViewModel\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -409,8 +409,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Hospital_Management\\Service.csproj": {
-                "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Hospital_Management\\Service.csproj"
+              "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Hospital_Management\\Service.csproj": {
+                "projectPath": "D:\\FPT\\SU25\\PRNWOHAHA\\Hospital_Management\\Hospital_Management\\Service.csproj"
               }
             }
           }

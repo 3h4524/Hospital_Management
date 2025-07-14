@@ -24,17 +24,21 @@ namespace View
 
                 var services = new ServiceCollection();
                 services.AddDbContext<HospitalManagementContext>(options =>
-                    options.UseSqlServer("Data Source=3H;Initial Catalog=Hospital_Management;User ID=sa;Password=3H452004hh@;TrustServerCertificate=True;"));
+                    options.UseSqlServer("Server=localhost,1433;Initial Catalog=Hospital_Management;User ID=sa;Password=3H452004hh@;TrustServerCertificate=True;"));
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
+                services.AddScoped<DoctorScheduleRepository>();
                 services.AddScoped<AuthenticationService>();
                 services.AddScoped<EmailService>();
+                services.AddScoped<DoctorScheduleService>();
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<INavigateService, NavigateService>();
                 services.AddTransient<LoginViewModel>();
                 services.AddTransient<RegisterViewModel>();
                 services.AddTransient<ForgetPasswordViewModel>();
                 services.AddTransient<ResetPasswordViewModel>();
+                services.AddTransient<DoctorSchedulesViewModel>();
+
 
                 _serviceProvider = services.BuildServiceProvider();
 
