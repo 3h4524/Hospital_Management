@@ -11,6 +11,7 @@ using Repository;
 using BCrypt;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Service
 {
@@ -30,6 +31,14 @@ namespace Service
         {
             return await _doctorScheduleRepository.GetDoctorSchedulesByMonth(DoctorId, month, year);
         }
+
+        public async Task<bool> RequestSessionOff(DoctorSchedule schedule)
+        {
+            schedule.IsAvailable = false;
+            await _doctorScheduleRepository.Update(schedule);
+            return true;
+        }
+
     }
 
 

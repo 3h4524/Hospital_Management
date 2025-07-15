@@ -37,7 +37,7 @@ namespace View
                 services.AddTransient<RegisterViewModel>();
                 services.AddTransient<ForgetPasswordViewModel>();
                 services.AddTransient<ResetPasswordViewModel>();
-                services.AddTransient<DoctorSchedulesViewModel>();
+                //services.AddTransient<DoctorSchedulesViewModel>();
 
 
                 _serviceProvider = services.BuildServiceProvider();
@@ -46,8 +46,8 @@ namespace View
                 var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
                 navigateService.SetNavigateService(mainViewModel);
 
-                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<MainViewModel>());
-                MainWindow = mainWindow;
+                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<MainViewModel>(), _serviceProvider.GetRequiredService<DoctorScheduleService>());
+                //MainWindow = mainWindow;
                 mainWindow.Show();
             }
             catch (Exception ex)

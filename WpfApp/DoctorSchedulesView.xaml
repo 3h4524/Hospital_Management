@@ -34,105 +34,118 @@
         <Border.Effect>
             <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
         </Border.Effect>
-        <StackPanel Orientation="Vertical" Margin="20">
-            <TextBlock Text="Doctor Schedule Calendar" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Grid VerticalAlignment="Top" Margin="0,20,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid>
+            <StackPanel Orientation="Vertical" Margin="20">
+                <TextBlock Text="Doctor Schedule Calendar" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Grid VerticalAlignment="Top" Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Doctor ID" Grid.Row="0" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5" Width="200" BorderThickness="0,0,0,1" 
-                         Text="{Binding DoctorId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Doctor ID" Grid.Row="0" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="DoctorIdTextBox" Grid.Row="0" Grid.Column="1" Margin="0,5" Width="200" BorderThickness="0,0,0,1" KeyDown="TextBox_KeyDown"/>
 
-                <TextBlock Text="Month" Grid.Row="1" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,5" Width="200" SelectedIndex="{Binding SelectedMonth, Converter={StaticResource MonthConverter}}">
-                    <ComboBoxItem Content="January"/>
-                    <ComboBoxItem Content="February"/>
-                    <ComboBoxItem Content="March"/>
-                    <ComboBoxItem Content="April"/>
-                    <ComboBoxItem Content="May"/>
-                    <ComboBoxItem Content="June"/>
-                    <ComboBoxItem Content="July"/>
-                    <ComboBoxItem Content="August"/>
-                    <ComboBoxItem Content="September"/>
-                    <ComboBoxItem Content="October"/>
-                    <ComboBoxItem Content="November"/>
-                    <ComboBoxItem Content="December"/>
-                </ComboBox>
+                    <TextBlock Text="Month" Grid.Row="1" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="MonthComboBox" Grid.Row="1" Grid.Column="1" Margin="0,5" Width="200" SelectionChanged="MonthComboBox_SelectionChanged">
+                        <ComboBoxItem Content="January"/>
+                        <ComboBoxItem Content="February"/>
+                        <ComboBoxItem Content="March"/>
+                        <ComboBoxItem Content="April"/>
+                        <ComboBoxItem Content="May"/>
+                        <ComboBoxItem Content="June"/>
+                        <ComboBoxItem Content="July"/>
+                        <ComboBoxItem Content="August"/>
+                        <ComboBoxItem Content="September"/>
+                        <ComboBoxItem Content="October"/>
+                        <ComboBoxItem Content="November"/>
+                        <ComboBoxItem Content="December"/>
+                    </ComboBox>
 
-                <TextBlock Text="Year" Grid.Row="2" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5" Width="200" BorderThickness="0,0,0,1" 
-                         Text="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="Year" Grid.Row="2" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
+                    <TextBox x:Name="YearTextBox" Grid.Row="2" Grid.Column="1" Margin="0,5" Width="200" BorderThickness="0,0,0,1" KeyDown="TextBox_KeyDown"/>
 
-                <Button Content="Load Calendar" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-                        Command="{Binding LoadSchedulesCommand}" Background="Black" Foreground="White"
-                        Height="36" Margin="0,20,0,10" Width="200"/>
-
-                <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Message}" 
-                           Foreground="Red" Margin="0,10,0,0" TextWrapping="Wrap"/>
-            </Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
-                <Button Content="&lt;" Command="{Binding PreviousMonthCommand}" Width="30" Height="30"/>
-                <TextBlock FontSize="18" VerticalAlignment="Center" Margin="10,0">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0}, {1}">
-                            <Binding Path="SelectedMonth" Converter="{StaticResource MonthNameConverter}"/>
-                            <Binding Path="SelectedYear"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-
-                <Button Content="&gt;" Command="{Binding NextMonthCommand}" Width="30" Height="30"/>
+                    <Button x:Name="LoadCalendarButton" Content="Load Calendar" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                            Background="Black" Foreground="White" Height="36" Margin="0,20,0,10" Width="200" Click="LoadCalendarButton_Click"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+                    <Button x:Name="PreviousMonthButton" Content="&lt;" Width="30" Height="30" Click="PreviousMonthButton_Click"/>
+                    <TextBlock x:Name="MonthYearTextBlock" FontSize="18" VerticalAlignment="Center" Margin="10,0"/>
+                    <Button x:Name="NextMonthButton" Content=">" Width="30" Height="30" Click="NextMonthButton_Click"/>
+                </StackPanel>
+                <Grid Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <UniformGrid Columns="7" Margin="0,0,0,10">
+                        <TextBlock Text="Sun" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Mon" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Tue" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Wed" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Thu" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Fri" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Sat" TextAlignment="Center" FontWeight="Bold"/>
+                    </UniformGrid>
+                    <ItemsControl x:Name="CalendarItemsControl" Grid.Row="1">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="7"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource CalendarDayStyle}" MouseLeftButtonDown="CalendarDay_MouseLeftButtonDown">
+                                    <TextBlock Text="{Binding Day}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                                    <ToolTipService.ToolTip>
+                                        <TextBlock Text="{Binding ScheduleDetails}" TextWrapping="Wrap" MaxWidth="200"/>
+                                    </ToolTipService.ToolTip>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Border Background="LightGreen" Width="20" Height="20" Margin="5"/>
+                    <TextBlock Text="Available slots" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Border Background="LightCoral" Width="20" Height="20" Margin="5"/>
+                    <TextBlock Text="Fully booked" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Border Background="Yellow" Width="20" Height="20" Margin="5"/>
+                    <TextBlock Text="Partially booked" VerticalAlignment="Center"/>
+                </StackPanel>
             </StackPanel>
-            <Grid Margin="0,20,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <UniformGrid Columns="7" Margin="0,0,0,10">
-                    <TextBlock Text="Sun" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="Mon" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="Tue" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="Wed" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="Thu" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="Fri" TextAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="Sat" TextAlignment="Center" FontWeight="Bold"/>
-                </UniformGrid>
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding CalendarDays}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="7"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Style="{StaticResource CalendarDayStyle}">
-                                <TextBlock Text="{Binding Day}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0"/>
-                                <ToolTipService.ToolTip>
-                                    <TextBlock Text="{Binding ScheduleDetails}" TextWrapping="Wrap" MaxWidth="200"/>
-                                </ToolTipService.ToolTip>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Border Background="LightGreen" Width="20" Height="20" Margin="5"/>
-                <TextBlock Text="Available slots" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <Border Background="LightCoral" Width="20" Height="20" Margin="5"/>
-                <TextBlock Text="Fully booked" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <Border Background="Yellow" Width="20" Height="20" Margin="5"/>
-                <TextBlock Text="Partially booked" VerticalAlignment="Center"/>
-            </StackPanel>
-        </StackPanel>
+            <Popup x:Name="SchedulePopup" Placement="Center" AllowsTransparency="True" PopupAnimation="Fade">
+                <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Padding="15">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
+                    </Border.Effect>
+                    <StackPanel Width="300">
+                        <TextBlock x:Name="PopupDateTextBlock" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <ItemsControl x:Name="PopupScheduleItemsControl" Margin="0,0,0,10">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0,2">
+                                        <TextBlock Text="{Binding StartTime}" Width="80"/>
+                                        <TextBlock Text="-" Margin="5,0"/>
+                                        <TextBlock Text="{Binding EndTime}" Width="80"/>
+                                        <TextBlock Text="{Binding Status}" Margin="5,0"/>
+                                        <Button Content="Request Off" Width="100" Margin="5,0" Click="RequestSessionOff_Click" Tag="{Binding Schedule}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button x:Name="RequestFullDayOffButton" Content="Request Full Day Off" Width="150" Margin="0,10,0,0" Click="RequestFullDayOffButton_Click"/>
+                        <Button Content="Close" Width="100" Margin="0,10,0,0" Click="ClosePopupButton_Click"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
     </Border>
 </UserControl>

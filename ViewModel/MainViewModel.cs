@@ -18,7 +18,7 @@ namespace ViewModel
         public MainViewModel(IServiceProvider serviceProvider) 
         {
             _serviceProvider = serviceProvider;
-            NavigateTo<DoctorSchedulesViewModel>();
+            NavigateTo<LoginViewModel>();
             
         }
 
