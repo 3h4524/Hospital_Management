@@ -248,9 +248,9 @@ namespace View
         public List<DoctorSchedule> Schedules { get; set; }
         public bool HasSchedules => Schedules != null && Schedules.Any();
         public bool HasOnlyAvailableSchedules => Schedules.Any() && Schedules.All(s => s.IsAvailable == true);
-        public bool HasOnlyBookedSchedules => Schedules.Any() && Schedules.All(s => s.IsAvailable == false);
+        public bool HasOnlyAbsentdSchedules => Schedules.Any() && Schedules.All(s => s.IsAvailable == false);
         public bool HasMixedSchedules => Schedules.Any(s => s.IsAvailable == true) && Schedules.Any(s => s.IsAvailable == false);
-        public string ScheduleDetails => HasSchedules ? string.Join("\n", Schedules.Select(s => $"{s.StartTime} - {s.EndTime} ({(s.IsAvailable == true ? "Available" : "Booked")})")) : "";
+        public string ScheduleDetails => HasSchedules ? string.Join("\n", Schedules.Select(s => $"{s.StartTime} - {s.EndTime} ({(s.IsAvailable == true ? "Available" : "Absent")})")) : "";
     }
 
     public class MonthConverter : IValueConverter

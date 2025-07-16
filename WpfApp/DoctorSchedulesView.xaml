@@ -21,7 +21,7 @@
                 <DataTrigger Binding="{Binding HasOnlyAvailableSchedules}" Value="True">
                     <Setter Property="Background" Value="LightGreen"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding HasOnlyBookedSchedules}" Value="True">
+                <DataTrigger Binding="{Binding HasOnlyAbsentdSchedules}" Value="True">
                     <Setter Property="Background" Value="LightCoral"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding HasMixedSchedules}" Value="True">
