@@ -97,11 +97,11 @@
                        Text=""/>
 
             <TextBlock Text="Password" Style="{StaticResource LabelStyle}"/>
-            <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"/>
+            <PasswordBox x:Name="PasswordBox" LostFocus="PasswordBox_PasswordChanged"/>
             <TextBlock x:Name="PasswordError" Style="{StaticResource ErrorStyle}" Text=""/>
 
             <TextBlock Text="Confirm Password" Style="{StaticResource LabelStyle}"/>
-            <PasswordBox x:Name="ConfirmPasswordBox" PasswordChanged="ConfirmPasswordBox_PasswordChanged"/>
+            <PasswordBox x:Name="ConfirmPasswordBox" LostFocus="ConfirmPasswordBox_PasswordChanged"/>
             <TextBlock x:Name="ConfirmPasswordError" Style="{StaticResource ErrorStyle}" Text=""/>
 
             <Button Content="Register" Style="{StaticResource RoundedButtonStyle}" Click="Button_Click"/>

@@ -73,9 +73,9 @@ namespace Service
             {
                 Debug.WriteLine("Email not found");
                 return false;
-            } 
+            }
 
-
+            var random = new Random();
             string resetCode = Guid.NewGuid().ToString("N").Substring(0, 8);
 
             var resetEntry = new EmailResetPassword

@@ -1,1 +1,12 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.cache
+*.log
+*.vspscc
+*.vssscc
+
+# Visual Studio folders
 .vs/

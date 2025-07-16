@@ -22,6 +22,7 @@ namespace View
         {
             InitializeComponent();
             Content = new LoginView(authenticationService);
+            //Content = new ResetPasswordView(authenticationService, "acsacac");
         }
     }
 }
