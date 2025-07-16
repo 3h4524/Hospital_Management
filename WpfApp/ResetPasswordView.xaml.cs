@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Service;
 using ViewModel;
 
 namespace View
@@ -20,17 +21,17 @@ namespace View
     /// </summary>
     public partial class ResetPasswordView : UserControl
     {
-        public ResetPasswordView()
+        private AuthenticationService _authenticationService;
+        public ResetPasswordView(AuthenticationService authenticationService)
         {
             InitializeComponent();
+            _authenticationService = authenticationService;
+
         }
 
         private void PwdChanged(object sender, RoutedEventArgs e)
         {
-            if (DataContext is ResetPasswordViewModel viewModel)
-            {
-                viewModel.NewPassword = ((PasswordBox)sender).Password;
-            }
+           
         }
     }
 }

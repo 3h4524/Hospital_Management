@@ -14,7 +14,7 @@ namespace View
 {
     public partial class App : Application
     {
-        private IServiceProvider _serviceProvider;
+        public static IServiceProvider _serviceProvider;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -29,20 +29,16 @@ namespace View
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<AuthenticationService>();
                 services.AddScoped<EmailService>();
-                services.AddSingleton<MainViewModel>();
-                services.AddSingleton<INavigateService, NavigateService>();
-                services.AddTransient<LoginViewModel>();
-                services.AddTransient<RegisterViewModel>();
-                services.AddTransient<ForgetPasswordViewModel>();
-                services.AddTransient<ResetPasswordViewModel>();
+                services.AddTransient<LoginView>();
+                services.AddTransient<MainWindow>();
 
                 _serviceProvider = services.BuildServiceProvider();
 
-                var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-                var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
-                navigateService.SetNavigateService(mainViewModel);
+                //var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+                //var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
+                //navigateService.SetNavigateService(mainViewModel);
 
-                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<MainViewModel>());
+                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<AuthenticationService>());
                 MainWindow = mainWindow;
                 mainWindow.Show();
             }

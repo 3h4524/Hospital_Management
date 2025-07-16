@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Service;
 using ViewModel;
 
 namespace View
@@ -17,16 +18,10 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(MainViewModel mainViewModel)
+        public MainWindow(AuthenticationService authenticationService)
         {
             InitializeComponent();
-            DataContext = mainViewModel;
+            Content = new LoginView(authenticationService);
         }
-
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Service;
 using ViewModel;
 
 namespace View
@@ -18,17 +19,22 @@ namespace View
 
     public partial class ForgetPasswordView : UserControl
     {
-        public ForgetPasswordView()
+        private AuthenticationService _authenticationService;
+        public ForgetPasswordView(AuthenticationService authenticationService)
         {
             InitializeComponent();
+            _authenticationService = authenticationService;
         }
+     
 
         private void BackToLogin(object sender, EventArgs e)
         {
-            if(DataContext is ForgetPasswordViewModel vm)
-            {
-                vm.GoLoginCommand.Execute(null);
-            }
+          
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

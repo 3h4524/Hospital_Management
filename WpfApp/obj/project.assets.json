@@ -1512,6 +1512,16 @@
           }
         }
       },
+      "Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.dll": {}
+        }
+      },
       "DataAccess/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -4123,6 +4133,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Common/1.0.0": {
+      "type": "project",
+      "path": "../Common/Common.csproj",
+      "msbuildProject": "../Common/Common.csproj"
+    },
     "DataAccess/1.0.0": {
       "type": "project",
       "path": "../DataAccess/DataAccess.csproj",
@@ -4156,6 +4171,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
+      "Common >= 1.0.0",
       "DataAccess >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.16",
       "Microsoft.Xaml.Behaviors.Wpf >= 1.1.135",
@@ -4194,6 +4210,9 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
+            "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Common\\Common.csproj": {
+              "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\Common\\Common.csproj"
+            },
             "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj": {
               "projectPath": "D:\\FPT\\Semester 5\\PRN1\\Hospital_Management\\DataAccess\\DataAccess.csproj"
             },
