@@ -21,6 +21,14 @@ public partial class Salary
 
     public decimal? TotalPenalty { get; set; }
 
+    public decimal? TaxRate { get; set; }
+
+    public decimal? TaxAmount { get; set; }
+
+    public decimal? SocialInsurance { get; set; }
+
+    public decimal? HealthInsurance { get; set; }
+
     public decimal? FinalSalary { get; set; }
 
     public DateTime? GeneratedAt { get; set; }

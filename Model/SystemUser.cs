@@ -7,11 +7,11 @@ public partial class SystemUser
 {
     public int UserId { get; set; }
 
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
     public string? PhoneNumber { get; set; }
 
-    public string? FullName { get; set; }
+    public string FullName { get; set; } = null!;
 
     public string HashPassword { get; set; } = null!;
 
@@ -21,9 +21,11 @@ public partial class SystemUser
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual ICollection<Appointment> AppointmentDoctors { get; set; } = new List<Appointment>();
+    public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<Appointment> AppointmentPatients { get; set; } = new List<Appointment>();
+    public int? Dependencies { get; set; }
+
+    public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
     public virtual ICollection<ChatMessage> ChatMessageReceivers { get; set; } = new List<ChatMessage>();
 
@@ -31,11 +33,13 @@ public partial class SystemUser
 
     public virtual DoctorProfile? DoctorProfile { get; set; }
 
-    public virtual PatientProfile? PatientProfile { get; set; }
+    public virtual ICollection<DoctorSchedule> DoctorSchedules { get; set; } = new List<DoctorSchedule>();
 
     public virtual ICollection<RewardPenalty> RewardPenalties { get; set; } = new List<RewardPenalty>();
 
     public virtual ICollection<Salary> Salaries { get; set; } = new List<Salary>();
 
     public virtual ICollection<Timekeeping> Timekeepings { get; set; } = new List<Timekeeping>();
+
+    public virtual ICollection<EmailResetPassword> EmailResetPasswords { get; set; } = new List<EmailResetPassword>();
 }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,17 +9,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Service;
+using ViewModel;
 
-namespace WpfApp
+namespace View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindow(UserControl view)
+        {
+            InitializeComponent();
+            MainContent.Content = view;
+        }
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
     }
 }
