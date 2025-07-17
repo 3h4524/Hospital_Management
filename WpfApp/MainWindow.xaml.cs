@@ -18,12 +18,12 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(AuthenticationService authenticationService, DoctorScheduleService doctorScheduleService)
+        public MainWindow(AuthenticationService authenticationService)
         {
             InitializeComponent();
-            //MainContent.Content = new LoginView(authenticationService);
+            MainContent.Content = new LoginView(authenticationService);
             //Content = new ResetPasswordView(authenticationService, "acsacac");
-            MainContent.Content = new DoctorSchedulesView(doctorScheduleService);
+            //MainContent.Content = new DoctorSchedulesView(doctorScheduleService);
         }
     }
 }

@@ -56,9 +56,13 @@ namespace View
                 MessageBox.Show("Invalid email or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else
             {
-                if(user.Role == UserRole.Doctor.ToString())
+                Application.Current.Properties["CurrentUser"] = user;
+
+                if (user.Role == UserRole.Doctor.ToString())
                 {
-                    MessageBox.Show("Navigate to doctor dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Window main = Window.GetWindow(this);
+                    main.Content = new DoctorSchedulesView(App._serviceProvider.GetRequiredService<DoctorScheduleService>());
+
                 } else if  (user.Role == UserRole.Admin.ToString())
                 {
                     MessageBox.Show("Navigate to Admin dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);

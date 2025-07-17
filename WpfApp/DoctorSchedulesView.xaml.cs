@@ -18,7 +18,7 @@ namespace View
     public partial class DoctorSchedulesView : UserControl
     {
         private readonly DoctorScheduleService _doctorScheduleService;
-        private int _doctorId = 1;
+        private int _doctorId;
         private int _selectedMonth;
         private int _selectedYear;
         private ObservableCollection<DoctorSchedule> _schedules;
@@ -26,17 +26,23 @@ namespace View
         private bool _isLoading;
         private bool _isInitialized = false;
         private CalendarDay _selectedDay;
+        private SystemUser user;
 
         public DoctorSchedulesView(DoctorScheduleService DoctorScheduleService)
         {
             InitializeComponent();
 
             _doctorScheduleService = DoctorScheduleService;
+
+            user = Application.Current.Properties["CurrentUser"] as SystemUser
+                   ?? throw new InvalidOperationException("CurrentUser session is missing");
+
+            _doctorId = user.UserId;
+
             _schedules = [];
             _calendarDays = [];
             _selectedMonth = DateTime.Now.Month;
             _selectedYear = DateTime.Now.Year;
-            DoctorIdTextBox.Text = _doctorId.ToString();
             MonthComboBox.SelectedIndex = _selectedMonth - 1;
             YearTextBox.Text = _selectedYear.ToString();
             CalendarItemsControl.ItemsSource = _calendarDays;
@@ -53,11 +59,6 @@ namespace View
 
             try
             {
-                if (!int.TryParse(DoctorIdTextBox.Text, out _doctorId) || _doctorId <= 0)
-                {
-                    return (false, "Invalid Doctor ID");
-                }
-
                 if (!int.TryParse(YearTextBox.Text, out _selectedYear) || _selectedYear < 2000)
                 {
                     return (false, "Invalid Year");

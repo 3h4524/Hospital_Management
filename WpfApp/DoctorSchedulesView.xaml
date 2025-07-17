@@ -50,9 +50,6 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Doctor ID" Grid.Row="0" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
-                    <TextBox x:Name="DoctorIdTextBox" Grid.Row="0" Grid.Column="1" Margin="0,5" Width="200" BorderThickness="0,0,0,1" KeyDown="TextBox_KeyDown"/>
-
                     <TextBlock Text="Month" Grid.Row="1" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
                     <ComboBox x:Name="MonthComboBox" Grid.Row="1" Grid.Column="1" Margin="0,5" Width="200" SelectionChanged="MonthComboBox_SelectionChanged">
                         <ComboBoxItem Content="January"/>

@@ -39,7 +39,7 @@ namespace View
                 //var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
                 //navigateService.SetNavigateService(mainViewModel);
 
-                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<AuthenticationService>(), _serviceProvider.GetRequiredService<DoctorScheduleService>());
+                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<AuthenticationService>());
                 MainWindow = mainWindow;
                 mainWindow.Show();
             }
