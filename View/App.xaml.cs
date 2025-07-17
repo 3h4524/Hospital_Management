@@ -1,14 +1,15 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
-using System.Windows.Navigation;
-using DataAccess;
+﻿using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 using Service;
+using System.Configuration;
+using System.Data;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Navigation;
 using View;
-using ViewModel;
 
 namespace View
 {
@@ -24,7 +25,7 @@ namespace View
 
                 var services = new ServiceCollection();
                 services.AddDbContext<HospitalManagementContext>(options =>
-                    options.UseSqlServer("Server=localhost,1433;Initial Catalog=Hospital_Management;User ID=sa;Password=3H452004hh@;TrustServerCertificate=True;"));
+                    options.UseSqlServer("Server=localhost,1433;Initial Catalog=Hospital_Management;User ID=sa;Password=Phuchaomb#16;TrustServerCertificate=True;"));
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<DoctorScheduleRepository>();
@@ -33,6 +34,7 @@ namespace View
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
                 services.AddScoped<DoctorScheduleService>();
+                services.AddTransient<AdminDashboardView>();
                 _serviceProvider = services.BuildServiceProvider();
 
                 //var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();

@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Common.Enum;
 using Microsoft.Extensions.DependencyInjection;
 using Service;
-using ViewModel;
 
 namespace View
 {
@@ -65,6 +64,10 @@ namespace View
 
                 } else if  (user.Role == UserRole.Admin.ToString())
                 {
+
+                    Window main = Window.GetWindow(this);
+                    main.Content = App._serviceProvider.GetRequiredService<AdminDashboardView>();
+
                     MessageBox.Show("Navigate to Admin dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 } else
                 {

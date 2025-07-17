@@ -11,5 +11,11 @@ public partial class DoctorProfile
 
     public DateOnly? JoinDate { get; set; }
 
+    public decimal? BaseSalary { get; set; }
+
+    public string? Gender { get; set; }
+    public string? Degree { get; set; }
+    public string? Address { get; set; }
+
     public virtual SystemUser User { get; set; } = null!;
 }
