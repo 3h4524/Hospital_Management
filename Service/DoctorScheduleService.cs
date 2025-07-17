@@ -12,6 +12,7 @@ using BCrypt;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
+using System.Collections;
 
 namespace Service
 {
@@ -26,6 +27,15 @@ namespace Service
             _doctorScheduleRepository = new(context);
         }
 
+        public async Task<DoctorSchedule> GetDoctorScheduleById(int scheduleId)
+        {
+           return await _doctorScheduleRepository.FindByID(scheduleId);
+        }
+
+        public async Task<IEnumerable<DoctorSchedule>> GetDoctorSchedulesByDoctorIdAndWorkDate(int userId, DateOnly today)
+        {
+            return await _doctorScheduleRepository.GetDoctorSchedulesByDoctorIdAndWorkDate(userId, today);
+        }
 
         public async Task<IEnumerable<DoctorSchedule>> GetDoctorSchedulesByMonth(int DoctorId, int month, int year)
         {

@@ -9,6 +9,8 @@ public partial class Timekeeping
 
     public int UserId { get; set; }
 
+    public int ScheduleId { get; set; }
+
     public DateOnly WorkDate { get; set; }
 
     public TimeOnly? CheckInTime { get; set; }
@@ -20,4 +22,6 @@ public partial class Timekeeping
     public string? Note { get; set; }
 
     public virtual SystemUser User { get; set; } = null!;
+    public virtual DoctorSchedule Schedule { get; set; } = null!;
+
 }

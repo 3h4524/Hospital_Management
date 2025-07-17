@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using DataAccess;
+using Microsoft.Extensions.DependencyInjection;
 using Model;
 using Repository;
 using Service;
@@ -13,24 +15,32 @@ namespace View
     public partial class AttendanceTrackingView : UserControl
     {
         private readonly AttendanceService _attendanceService;
+
+        private readonly DoctorScheduleService _doctorScheduleService;
+
         public ObservableCollection<Timekeeping> AttendanceRecords { get; set; } = new();
 
-        // Giờ làm việc chuẩn (có thể chỉnh theo quy định công ty)
-        private static readonly TimeOnly StartWorkTime = new(8, 0);   // 8:00 sáng
-        private static readonly TimeOnly EndWorkTime = new(17, 0);    // 17:00 chiều
+        private SystemUser user;
 
         public AttendanceTrackingView(AttendanceService attendanceService)
         {
             InitializeComponent();
             _attendanceService = attendanceService;
+            _doctorScheduleService = App._serviceProvider.GetRequiredService<DoctorScheduleService>();
             AttendanceDataGrid.ItemsSource = AttendanceRecords;
+
+            user = Application.Current.Properties["CurrentUser"] as SystemUser
+                   ?? throw new InvalidOperationException("CurrentUser session is missing");
+
             LoadAttendance();
         }
 
-        private async void LoadAttendance()
+        private async Task LoadAttendance()
         {
+
+            Debug.WriteLine("debug" + user.UserId);
             AttendanceRecords.Clear();
-            var userId = 1; // TODO: Lấy userId hiện tại (hoặc truyền vào constructor)
+            var userId = user.UserId;
             var records = await _attendanceService.GetByUser(userId);
             foreach (var record in records.OrderByDescending(r => r.WorkDate))
                 AttendanceRecords.Add(record);
@@ -39,64 +49,98 @@ namespace View
         private async void CheckInButton_Click(object sender, RoutedEventArgs e)
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
-            var userId = 1; // TODO: Lấy userId hiện tại
-            var records = await _attendanceService.GetByUser(userId);
-            var todayRecord = records.FirstOrDefault(r => r.WorkDate == today);
+            var checkInTime = TimeOnly.FromDateTime(DateTime.Now);
+            var checkOutTime = new TimeOnly(0, 0);
+            var userId = user.UserId;
 
-            if (todayRecord != null && todayRecord.CheckInTime != null)
+            var schedules = await _doctorScheduleService.GetDoctorSchedulesByDoctorIdAndWorkDate(userId, today);
+
+            if (schedules.Any()) {
+
+                DoctorSchedule? thisSchedule = schedules
+                    .FirstOrDefault(s => checkInTime >= s.StartTime.AddHours(-1) && checkInTime <= s.EndTime);
+       
+                if (thisSchedule == null)
+                {
+                    MessageBox.Show("Chưa tới lịch làm của bạn!");
+                    return;
+                }  else {
+                    bool alreadyCheckedIn = await _attendanceService.HasCheckedInForSchedule(userId, thisSchedule.ScheduleId);
+                    if (alreadyCheckedIn)
+                    {
+                        MessageBox.Show("Bạn đã điểm danh cho ca làm này rồi!");
+                        return;
+                    }
+
+                    Timekeeping timeKeeping = new Timekeeping
+                    {
+                        UserId = userId,
+                        ScheduleId = thisSchedule.ScheduleId,
+                        WorkDate = today,
+                        CheckInTime = checkInTime,
+                        CheckOutTime = checkOutTime,
+                        Status = checkInTime <= thisSchedule.StartTime ? "ON TIME" : "Late"
+                    };
+
+                    await _attendanceService.Add(timeKeeping);
+
+                    await LoadAttendance();
+                }
+                    
+            } else
             {
-                MessageBox.Show("Bạn đã check-in hôm nay rồi!");
-                return;
+                MessageBox.Show("Bạn không có lịch làm hôm nay!");
             }
-
-            var now = TimeOnly.FromDateTime(DateTime.Now);
-            string status = now <= StartWorkTime ? "ON TIME" : "Late";
-
-            var newRecord = todayRecord ?? new Timekeeping { UserId = userId, WorkDate = today };
-            newRecord.CheckInTime = now;
-            newRecord.Status = status;
-
-            //if (todayRecord == null)
-            //    await _attendanceService.Add(newRecord);
-            //else
-            //    await _attendanceService.Update(newRecord);
-
-            LoadAttendance();
         }
 
         private async void CheckOutButton_Click(object sender, RoutedEventArgs e)
         {
             var today = DateOnly.FromDateTime(DateTime.Now);
-            var userId = 1; // TODO: Lấy userId hiện tại
-            var records = await _attendanceService.GetByUser(userId);
-            var todayRecord = records.FirstOrDefault(r => r.WorkDate == today);
+            var checkOutTime = TimeOnly.FromDateTime(DateTime.Now);
+            var userId = user.UserId;
 
-            if (todayRecord == null || todayRecord.CheckInTime == null)
+            var timeKeeping = await _attendanceService.GetActiveTimeKeepingForUserAndDate(userId, today);
+
+            if (timeKeeping == null)
             {
-                MessageBox.Show("Bạn chưa check-in hôm nay!");
-                return;
-            }
-            if (todayRecord.CheckOutTime != null)
-            {
-                MessageBox.Show("Bạn đã check-out hôm nay rồi!");
+                MessageBox.Show("Không có ca làm nào cần checkout!");
                 return;
             }
 
-            var now = TimeOnly.FromDateTime(DateTime.Now);
-            string status = todayRecord.Status;
-            if (now < EndWorkTime)
-                status = "Early"; // Về sớm
+            // Lấy thông tin lịch làm việc tương ứng
+            var schedule = await _doctorScheduleService.GetDoctorScheduleById(timeKeeping.ScheduleId);
 
-            todayRecord.CheckOutTime = now;
-            todayRecord.Status = status;
+            if (schedule == null)
+            {
+                MessageBox.Show("Không tìm thấy lịch làm việc!");
+                return;
+            }
 
-            //await _attendanceService.Update(todayRecord);
-            LoadAttendance();
+            // Kiểm tra thời gian checkout
+            if (checkOutTime < schedule.EndTime)
+            {
+                MessageBox.Show("Chưa tới giờ checkout!");
+                return;
+            }
+
+            if (checkOutTime > schedule.EndTime.AddHours(1))
+            {
+                MessageBox.Show("Đã quá thời gian checkout!");
+                return;
+            }
+
+            // Cập nhật thời gian checkout
+            timeKeeping.CheckOutTime = checkOutTime;
+            await _attendanceService.Update(timeKeeping);
+            await LoadAttendance();
+            MessageBox.Show("Checkout thành công!");
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private async void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadAttendance();
+
+            await LoadAttendance();
+
         }
     }
 }

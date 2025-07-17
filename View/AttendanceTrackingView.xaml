@@ -19,27 +19,36 @@
             </Grid.RowDefinitions>
 
             <!-- Tiêu đề -->
-            <TextBlock Text="Quản lý chấm công" FontSize="20" FontWeight="Bold" 
-                       HorizontalAlignment="Center" Margin="0,0,0,20" Grid.Row="0"/>
+            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock Text="Quản lý chấm công" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Path=User.FullName}" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
+            </StackPanel>
 
             <!-- Các nút chức năng -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10" Grid.Row="1">
-                <Button Content="Check-in" Width="100" Margin="5" Click="CheckInButton_Click"/>
-                <Button Content="Check-out" Width="100" Margin="5" Click="CheckOutButton_Click"/>
-                <Button Content="Làm mới" Width="100" Margin="5" Click="RefreshButton_Click"/>
-            </StackPanel>
+            <DockPanel Grid.Row="1" Margin="0,0,0,15">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Button Content="Check-in" Width="100" Margin="5" Click="CheckInButton_Click"/>
+                    <Button Content="Check-out" Width="100" Margin="5" Click="CheckOutButton_Click"/>
+                    <Button Content="Làm mới" Width="100" Margin="5" Click="RefreshButton_Click"/>
+                </StackPanel>
+            </DockPanel>
 
             <!-- Bảng dữ liệu -->
             <DataGrid x:Name="AttendanceDataGrid"
                       Grid.Row="2"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
-                      Margin="0"
                       Background="#F9F9F9"
                       BorderThickness="1"
                       BorderBrush="Gray"
                       SelectionMode="Single"
-                      CanUserAddRows="False">
+                      CanUserAddRows="False"
+                      HeadersVisibility="Column"
+                      VerticalScrollBarVisibility="Auto"
+                      RowHeight="35"
+                      ColumnHeaderHeight="40"
+                      FontSize="14">
+
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="#F5F5F5"/>
