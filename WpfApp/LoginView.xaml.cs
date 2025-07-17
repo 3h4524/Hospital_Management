@@ -1,38 +1,72 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Common.Enum;
+using Microsoft.Extensions.DependencyInjection;
+using Service;
 using ViewModel;
 
 namespace View
 {
     public partial class LoginView : UserControl
     {
-        public LoginView()
+        AuthenticationService _authenticationService;
+
+        public LoginView(AuthenticationService authenticationService)
         {
             InitializeComponent();
+            _authenticationService = authenticationService;
         }
 
-        private void PwdChanged(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is LoginViewModel viewModel)
-            {
-                viewModel.Password = ((PasswordBox)sender).Password;
-            }
-        }
 
         private void OnForgotPasswordClick(object sender, MouseButtonEventArgs e)
         {
-            if (DataContext is LoginViewModel viewModel)
-            {
-                viewModel.GoForgotCommand.Execute(null);
-            }
+            Window main = Window.GetWindow(this);
+            main.Content = new ForgetPasswordView(_authenticationService);
         }
 
         private void OnRegisterClick(object sender, MouseButtonEventArgs e)
         {
-            if (DataContext is LoginViewModel viewModel)
+            Window main = Window.GetWindow(this);
+            main.Content = new RegisterView(_authenticationService);
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string email = EmailBox.Text.Trim();
+            string password = PasswordBox.Password;
+
+            if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                viewModel.GoRegisterCommand.Execute(null);
+                MessageBox.Show("Email or password can not empty", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                MessageBox.Show("Email must be containt @ and .", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var user = await _authenticationService.Login(email, password);
+
+            if(user == null)
+            {
+                MessageBox.Show("Invalid email or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else
+            {
+                if(user.Role == UserRole.Doctor.ToString())
+                {
+                    MessageBox.Show("Navigate to doctor dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else if  (user.Role == UserRole.Admin.ToString())
+                {
+                    MessageBox.Show("Navigate to Admin dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else
+                {
+                    MessageBox.Show("Navigate to Other dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
             }
         }
     }

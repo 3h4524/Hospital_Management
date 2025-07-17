@@ -20,6 +20,13 @@ namespace Service
         private readonly EmailPasswordResetRepository _emailPasswordResetRepository;
         private readonly EmailService _emailService;
 
+        enum UserRole
+        {
+            Admin,
+            Receptionist,
+            Doctor
+        }
+
         public AuthenticationService(HospitalManagementContext context)
         {
             _userRepository = new SystemUserRepository(context);
@@ -37,7 +44,7 @@ namespace Service
             return isValid ? user : null;
         }
 
-        public async Task<bool> Register(String email, String password)
+        public async Task<bool> Register(String email, String password, string fullName, string role, string phoneNumber = null)
         {
             if (await _userRepository.CheckExistedEmail(email))
                 return false;
@@ -47,7 +54,10 @@ namespace Service
             var newUser = new SystemUser
             {
                 Email = email,
-                HashPassword = hashPassword
+                HashPassword = hashPassword,
+                FullName = fullName,
+                Role = role,
+                PhoneNumber = phoneNumber
             };
 
             await _userRepository.Add(newUser);
@@ -63,9 +73,9 @@ namespace Service
             {
                 Debug.WriteLine("Email not found");
                 return false;
-            } 
+            }
 
-
+            var random = new Random();
             string resetCode = Guid.NewGuid().ToString("N").Substring(0, 8);
 
             var resetEntry = new EmailResetPassword

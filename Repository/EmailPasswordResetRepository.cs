@@ -17,7 +17,7 @@ namespace Repository
 
         public async Task<EmailResetPassword?> GetValidResetCode(string email, string code)
         {
-            return await _context.EmailResetPasswords
+            return await _context.EmailResetPassword
                 .Include(e => e.User)
                 .Where(e => e.User.Email == email &&
                             e.ResetCode == code &&
@@ -29,7 +29,7 @@ namespace Repository
         public async Task MarkAsUsed(EmailResetPassword entry)
         {
             entry.IsUsed = true;
-            _context.EmailResetPasswords.Update(entry);
+            _context.EmailResetPassword.Update(entry);
             await _context.SaveChangesAsync();
         }
     }
