@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="320"
+             Height="700"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="RoundedButtonStyle" TargetType="Button">
@@ -68,12 +70,20 @@
                        Text=""/>
 
             <TextBlock Text="Role" Style="{StaticResource LabelStyle}"/>
-            <ComboBox x:Name="RoleBox" Width="255" Margin="0,0,0,5" SelectedItem="{Binding Role, UpdateSourceTrigger=LostFocus}">
+            <ComboBox x:Name="RoleBox" Width="230" Margin="0,0,0,5" SelectedItem="{Binding Role, UpdateSourceTrigger=LostFocus}" RenderTransformOrigin="0.5,0.5">
                 <ComboBox.Resources>
                     <Style TargetType="ComboBox">
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
                     </Style>
                 </ComboBox.Resources>
+                <ComboBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.268"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ComboBox.RenderTransform>
             </ComboBox>
             <TextBlock x:Name="RoleError" Style="{StaticResource ErrorStyle}"
                        Text=""/>

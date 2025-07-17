@@ -4,10 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
-        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-        xmlns:v="clr-namespace:View" 
-    mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d"
+        Title="MainWindow"
+        SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="CenterScreen"
+    MinWidth="300" MinHeight="200">
+    <!-- Đặt kích thước tối thiểu nếu cần -->
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- ContentControl chứa giao diện -->
+        <ContentControl x:Name="MainContent" Grid.Row="0"/>
     </Grid>
 </Window>

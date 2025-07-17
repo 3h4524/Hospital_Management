@@ -21,7 +21,7 @@ namespace View
         public MainWindow(AuthenticationService authenticationService)
         {
             InitializeComponent();
-            Content = new LoginView(authenticationService);
+            MainContent.Content = new LoginView(authenticationService);
             //Content = new ResetPasswordView(authenticationService, "acsacac");
         }
     }
