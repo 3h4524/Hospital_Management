@@ -65,11 +65,15 @@ namespace View
 
                 } else if  (user.Role == UserRole.Admin.ToString())
                 {
-                    MessageBox.Show("Navigate to Admin dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Window main = Window.GetWindow(this);
+                    main.Content = new AttendanceTrackingView(App._serviceProvider.GetRequiredService<AttendanceService>());
+
+                    //Window main = Window.GetWindow(this);
+                    //main.Content = new AssignRoleView(App._serviceProvider.GetRequiredService<UserRoleService>());
                 } else
                 {
-                    MessageBox.Show("Navigate to Other dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                    MessageBox.Show("Hahaha Tao La Nhat", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
