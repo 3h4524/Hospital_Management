@@ -56,7 +56,7 @@ namespace Service
                 PatientId = patient.PatientId,
                 DoctorId = bookingRequest.DoctorId,
                 AppointmentDate = bookingRequest.BookingDate,
-                TimeSlot = bookingRequest.StartTime,
+                TimeSlot = TimeOnly.FromTimeSpan(bookingRequest.EndTime - bookingRequest.StartTime),
                 Reason = bookingRequest.Reason,
                 Status = "Pending",
             };

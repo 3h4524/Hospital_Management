@@ -14,6 +14,8 @@ namespace DTO.Request
 
         public TimeOnly StartTime { get; set; }
 
+        public TimeOnly EndTime { get; set; }
+
         public string? Reason { get; set; }
 
     }
