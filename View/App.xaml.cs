@@ -24,7 +24,7 @@ namespace View
 
                 var services = new ServiceCollection();
                 services.AddDbContext<HospitalManagementContext>(options =>
-                    options.UseSqlServer("Data Source=3H;Initial Catalog=Hospital_Management;User ID=sa;Password=3H452004hh@;TrustServerCertificate=True;"));
+                    options.UseSqlServer("Server=localhost,1433;Initial Catalog=Hospital_Management;User ID=sa;Password=3H452004hh@;TrustServerCertificate=True;"));
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<AuthenticationService>();
