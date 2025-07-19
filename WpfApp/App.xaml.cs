@@ -28,6 +28,7 @@ namespace View
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<AuthenticationService>();
+                services.AddScoped<AppointmentBookingService>();
                 services.AddScoped<EmailService>();
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();

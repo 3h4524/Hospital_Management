@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 using Service;
 using ViewModel;
 
@@ -21,8 +22,8 @@ namespace View
         public MainWindow(AuthenticationService authenticationService)
         {
             InitializeComponent();
-            MainContent.Content = new LoginView(authenticationService);
-            //Content = new ResetPasswordView(authenticationService, "acsacac");
+            //MainContent.Content = new LoginView(authenticationService);
+            MainContent.Content = new AppointmentBooking(App._serviceProvider.GetRequiredService<AppointmentBookingService>());
         }
     }
 }
