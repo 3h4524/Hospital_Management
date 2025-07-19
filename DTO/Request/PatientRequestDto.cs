@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace DTO.Request
 {
-    internal class PatientRequestDto
+    public class PatientRequestDto
     {
+        public string FullName { get; set; } = null!;
+
+        public string? PhoneNumber { get; set; }
+
+        public string? Gender { get; set; }
+
     }
 }
