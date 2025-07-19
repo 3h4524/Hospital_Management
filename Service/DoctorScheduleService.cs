@@ -34,7 +34,8 @@ namespace Service
 
         public async Task<bool> RequestSessionOff(DoctorSchedule schedule)
         {
-            schedule.IsAvailable = false;
+
+            schedule.Status = "Pending";
             await _doctorScheduleRepository.Update(schedule);
             return true;
         }

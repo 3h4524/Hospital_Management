@@ -15,7 +15,7 @@ public partial class DoctorSchedule
 
     public TimeOnly EndTime { get; set; }
 
-    public bool IsAvailable { get; set; }
+    public String Status { get; set; } = "Working";
 
     public virtual SystemUser Doctor { get; set; } = null!;
 }

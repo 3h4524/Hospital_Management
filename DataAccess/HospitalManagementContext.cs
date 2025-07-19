@@ -116,7 +116,7 @@ public partial class HospitalManagementContext : DbContext
 
             entity.Property(e => e.ScheduleId).HasColumnName("ScheduleID");
             entity.Property(e => e.DoctorId).HasColumnName("DoctorID");
-            entity.Property(e => e.IsAvailable).HasDefaultValue(true);
+            entity.Property(e => e.Status).HasMaxLength(20);
 
             entity.HasOne(d => d.Doctor).WithMany(p => p.DoctorSchedules)
                 .HasForeignKey(d => d.DoctorId)

@@ -179,11 +179,10 @@ namespace View
                 {
                     s.StartTime,
                     s.EndTime,
-                    Status = s.IsAvailable ? "Available" : "Absent",
                     Schedule = s
                 }).ToList();
                 PopupScheduleItemsControl.ItemsSource = scheduleItems;
-                RequestFullDayOffButton.IsEnabled = calendarDay.HasSchedules && calendarDay.Schedules.Any(s => s.IsAvailable);
+                RequestFullDayOffButton.IsEnabled = calendarDay.HasSchedules && calendarDay.Schedules.Any(s => s.Status == "Working");
                 SchedulePopup.IsOpen = true;
             }
         }
@@ -191,7 +190,7 @@ namespace View
         private async void RequestSessionOff_Click(object sender, RoutedEventArgs e)
         {
             SchedulePopup.IsOpen = false;
-            if (sender is Button button && button.Tag is DoctorSchedule schedule && schedule.IsAvailable)
+            if (sender is Button button && button.Tag is DoctorSchedule schedule && schedule.Status == "Working")
             {
                 var result = MessageBox.Show($"Request off for session {schedule.StartTime} - {schedule.EndTime}?", "Confirm", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
@@ -212,7 +211,7 @@ namespace View
 
         private async void RequestFullDayOffButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_selectedDay != null && _selectedDay.HasSchedules && _selectedDay.Schedules.Any(s => s.IsAvailable))
+            if (_selectedDay != null && _selectedDay.HasSchedules && _selectedDay.Schedules.Any(s => s.Status == "Working"))
             {
                 SchedulePopup.IsOpen = false;
                 var result = MessageBox.Show($"Request off for the entire day of {_selectedDay.Day} {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(_selectedMonth)}, {_selectedYear}?", "Confirm", MessageBoxButton.YesNo);
@@ -220,8 +219,7 @@ namespace View
                 {
                     try
                     {
-                        // Placeholder: Call service to request off all available sessions for the day
-                        foreach (var schedule in _selectedDay.Schedules.Where(s => s.IsAvailable))
+                        foreach (var schedule in _selectedDay.Schedules.Where(s => s.Status == "Working"))
                         {
                             await _doctorScheduleService.RequestSessionOff(schedule);
                         }
@@ -248,10 +246,10 @@ namespace View
         public int Day { get; set; }
         public List<DoctorSchedule> Schedules { get; set; }
         public bool HasSchedules => Schedules != null && Schedules.Any();
-        public bool HasOnlyAvailableSchedules => Schedules.Any() && Schedules.All(s => s.IsAvailable == true);
-        public bool HasOnlyAbsentdSchedules => Schedules.Any() && Schedules.All(s => s.IsAvailable == false);
-        public bool HasMixedSchedules => Schedules.Any(s => s.IsAvailable == true) && Schedules.Any(s => s.IsAvailable == false);
-        public string ScheduleDetails => HasSchedules ? string.Join("\n", Schedules.Select(s => $"{s.StartTime} - {s.EndTime} ({(s.IsAvailable == true ? "Available" : "Absent")})")) : "";
+        public bool HasWorkingSchedules => Schedules.Any() && Schedules.All(s => s.Status == "Working");
+        public bool HasOffdSchedules => Schedules.Any() && Schedules.All(s => s.Status == "Off");
+        public bool HasMixedSchedules => Schedules.Any(s => s.Status == "Working") && Schedules.Any(s => s.Status == "Off") && Schedules.Any(s => s.Status == "Pending");
+        public string ScheduleDetails => HasSchedules ? string.Join("\n", Schedules.Select(s => $"{s.StartTime} - {s.EndTime} ({(s.Status)})")) : "";
     }
 
     public class MonthConverter : IValueConverter

@@ -18,10 +18,10 @@
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderThickness" Value="0"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding HasOnlyAvailableSchedules}" Value="True">
+                <DataTrigger Binding="{Binding HasWorkingSchedules}" Value="True">
                     <Setter Property="Background" Value="LightGreen"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding HasOnlyAbsentdSchedules}" Value="True">
+                <DataTrigger Binding="{Binding HasOffdSchedules}" Value="True">
                     <Setter Property="Background" Value="LightCoral"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding HasMixedSchedules}" Value="True">
