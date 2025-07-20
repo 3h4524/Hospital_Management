@@ -1,152 +1,178 @@
-﻿<UserControl x:Class="View.DoctorDetailBooking"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <!-- Blue theme styles -->
-        <SolidColorBrush x:Key="PrimaryBlueBrush" Color="#1E3A8A"/>
-        <SolidColorBrush x:Key="SecondaryBlueBrush" Color="#3B82F6"/>
-        <SolidColorBrush x:Key="LightBlueBrush" Color="#EFF6FF"/>
-        <SolidColorBrush x:Key="AccentBlueBrush" Color="#60A5FA"/>
+﻿    <UserControl x:Class="View.DoctorDetailBooking"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                 xmlns:local="clr-namespace:View"
+                 mc:Ignorable="d" 
+                 d:DesignHeight="450" d:DesignWidth="800">
+        <UserControl.Resources>
+            <!-- Blue theme styles -->
+            <SolidColorBrush x:Key="PrimaryBlueBrush" Color="#1E3A8A"/>
+            <SolidColorBrush x:Key="SecondaryBlueBrush" Color="#3B82F6"/>
+            <SolidColorBrush x:Key="LightBlueBrush" Color="#EFF6FF"/>
+            <SolidColorBrush x:Key="AccentBlueBrush" Color="#60A5FA"/>
 
-        <!-- Button Style -->
-        <Style x:Key="BlueButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource SecondaryBlueBrush}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="15,8"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                            CornerRadius="6"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{StaticResource PrimaryBlueBrush}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <!-- Button Style -->
+            <Style x:Key="BlueButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource SecondaryBlueBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Padding" Value="15,8"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="6"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource PrimaryBlueBrush}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <!-- DatePicker Style -->
-        <Style x:Key="BlueDatePickerStyle" TargetType="DatePicker">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
-            <Setter Property="BorderThickness" Value="2"/>
-        </Style>
+            <!-- DatePicker Style -->
+            <Style x:Key="BlueDatePickerStyle" TargetType="DatePicker">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Padding" Value="10,8"/>
+                <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Style>
 
-        <!-- DataGrid Style -->
-        <Style x:Key="BlueDataGridStyle" TargetType="DataGrid">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
-            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource LightBlueBrush}"/>
-            <Setter Property="AlternatingRowBackground" Value="{StaticResource LightBlueBrush}"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="CanUserDeleteRows" Value="False"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="SelectionMode" Value="Single"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-        </Style>
+            <!-- DataGrid Style -->
+            <Style x:Key="BlueDataGridStyle" TargetType="DataGrid">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource LightBlueBrush}"/>
+                <Setter Property="AlternatingRowBackground" Value="{StaticResource LightBlueBrush}"/>
+                <Setter Property="RowBackground" Value="White"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+                <Setter Property="CanUserAddRows" Value="False"/>
+                <Setter Property="CanUserDeleteRows" Value="False"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
+            </Style>
 
-        <!-- DataGrid Header Style -->
-        <Style x:Key="BlueDataGridHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{StaticResource PrimaryBlueBrush}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="12,10"/>
-            <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
-            <Setter Property="BorderThickness" Value="0,0,1,0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        </Style>
+            <!-- DataGrid Header Style -->
+            <Style x:Key="BlueDataGridHeaderStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="Background" Value="{StaticResource PrimaryBlueBrush}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Padding" Value="12,10"/>
+                <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
+                <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
 
-        <!-- DataGrid Cell Style -->
-        <Style x:Key="BlueDataGridCellStyle" TargetType="DataGridCell">
-            <Setter Property="Padding" Value="12,8"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" 
-                Background="{StaticResource PrimaryBlueBrush}"
-                Padding="20, 15">
-            <TextBlock Text="Lịch làm việc của bác sĩ"
-                       FontSize="24"
-                       Foreground="White"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
-        </Border>
+            <!-- DataGrid Cell Style -->
+            <Style x:Key="BlueDataGridCellStyle" TargetType="DataGridCell">
+                <Setter Property="Padding" Value="12,8"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </UserControl.Resources>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" 
+                    Background="{StaticResource PrimaryBlueBrush}"
+                    Padding="20, 15">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="Lịch làm việc của bác sĩ - "
+               FontSize="24"
+               Foreground="White"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"
+               Margin="0 0 15 0"/>
+                    <TextBlock Text="{Binding DoctorName}"
+               FontSize="24"
+               Foreground="White"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
 
-        <Border Grid.Row="1" Background="White"
-                Padding="20, 15">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <TextBlock Foreground="{StaticResource SecondaryBlueBrush}"
-                           Text="Ngày làm việc:"
-                           FontSize="16"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Margin="0 0 15 0"/>
-                <DatePicker Style="{StaticResource BlueDatePickerStyle}"
-                            Margin="0 0 15 0 "
-                            SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Content="Tìm kiếm"
-                        Width="100"
-                        Style="{StaticResource BlueButtonStyle}"
-                        Click="Search_Doctor_Click"/>
-            </StackPanel>
-        </Border>
+            <Border Grid.Row="1" Background="White"
+                    Padding="20, 15">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Foreground="{StaticResource SecondaryBlueBrush}"
+                               Text="Ngày làm việc:"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="0 0 15 0"/>
+                    <DatePicker Style="{StaticResource BlueDatePickerStyle}"
+                                Margin="0 0 15 0 "
+                                SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Tìm kiếm"
+                            Width="100"
+                            Style="{StaticResource BlueButtonStyle}"
+                            Click="Search_Doctor_Click"/>
+                </StackPanel>
+            </Border>
 
-        <DataGrid x:Name="DoctorDataGrid" 
-                  Grid.Row="1" 
-                  Style="{StaticResource BlueDataGridStyle}"
-                  ColumnHeaderStyle="{StaticResource BlueDataGridHeaderStyle}"
-                  CellStyle="{StaticResource BlueDataGridCellStyle}"
-                  ItemsSource="{Binding DoctorSchedule}"
-                  Margin="0,0,0,0">
-            <DataGrid.Resources>
-                <Style x:Key="CenterTextStyle" TargetType="TextBlock">
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                </Style>
-            </DataGrid.Resources>
-            
-        </DataGrid>
+            <DataGrid x:Name="DoctorDataGrid" 
+                      Grid.Row="2" 
+                      Style="{StaticResource BlueDataGridStyle}"
+                      ColumnHeaderStyle="{StaticResource BlueDataGridHeaderStyle}"
+                      CellStyle="{StaticResource BlueDataGridCellStyle}"
+                      ItemsSource="{Binding DoctorSchedule}"
+                      Margin="0,0,0,0">
+                <DataGrid.Resources>
+                    <Style x:Key="CenterTextStyle" TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Thời gian bắt đầu" Binding="{Binding StartTime}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
+                    <DataGridTextColumn Header="Thời gian kết thúc" Binding="{Binding EndTime}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
+                    <DataGridTextColumn Header="Tổng thời gian" Binding="{Binding TimeSlot}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
+                    <DataGridTextColumn Header="Bệnh nhân" Binding="{Binding PatientName}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
+                    <DataGridTemplateColumn Header="Đặt lịch khám" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Đặt lịch" 
+                        Style="{StaticResource BlueButtonStyle}" 
+                        FontSize="12" 
+                        Padding="10,5" 
+                        Click="BookingAppointment_Click"
+                        Tag="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         
         
-    </Grid>
-</UserControl>
+        </Grid>
+    </UserControl>

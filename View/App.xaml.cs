@@ -32,6 +32,13 @@ namespace View
                 services.AddScoped<EmailService>();
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
+                services.AddScoped<PatientRepository>();
+                services.AddScoped<DoctorScheduleRepository>();
+                services.AddScoped<DoctorRepository>();
+                services.AddScoped<AppointmentRepository>();
+
+
+
 
                 _serviceProvider = services.BuildServiceProvider();
 

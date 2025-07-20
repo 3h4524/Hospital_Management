@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,6 +43,7 @@ namespace View
             get => _doctorName;
             set => SetPropertyChanged(ref _doctorName, value);
         }
+
 
         public ObservableCollection<DoctorInfomationResponse> AvailableDoctors
         {
@@ -109,34 +111,11 @@ namespace View
         {
             if (sender is Button button && button.Tag is DoctorInfomationResponse selectedDoctor)
             {
-                try
+                Debug.WriteLine($"Date: {_selectedDate}");
+                Window window = Window.GetWindow(this);
+                if(window is MainWindow mainWindow)
                 {
-                    // Implement your booking logic here
-                    var result = MessageBox.Show(
-                        $"Xác nhận đặt lịch với bác sĩ {selectedDoctor.DoctorName} vào thời gian {selectedDoctor.AvailableDateTime}?",
-                        "Xác nhận đặt lịch",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Question);
-
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        // Assuming you have a method in your service to book the appointment
-                        // await _service.BookAppointment(selectedDoctor.DoctorId, selectedDoctor.AvailableDateTime);
-
-                        MessageBox.Show(
-                            $"Đã đặt lịch thành công với bác sĩ {selectedDoctor.DoctorName}!",
-                            "Thành công",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-
-                        // Refresh the list after booking
-                        SearchAvailableDoctor().ConfigureAwait(false);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi đặt lịch: {ex.Message}", "Lỗi",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    mainWindow.MainContent.Content = new DoctorDetailBooking(selectedDoctor, _selectedDate);
                 }
             }
         }

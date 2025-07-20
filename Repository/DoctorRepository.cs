@@ -85,6 +85,6 @@ namespace Repository
                     };
                 })
                 .ToList();
-        } 
+        }
     }
 }

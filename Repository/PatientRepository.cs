@@ -4,16 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess;
+using Microsoft.EntityFrameworkCore;
 using Model;
 
 namespace Repository
 {
     public class PatientRepository : BaseRepository<Patient>
     {
-        private readonly HospitalManagementContext _context;
         public PatientRepository(HospitalManagementContext context) : base(context)
         {
-            _context = context;
+        }
+
+        public async Task<Patient?> GetPatientByPhone(string phoneNumber)
+        {
+            return await _dbSet.FirstOrDefaultAsync(d => d.PhoneNumber == phoneNumber);
         }
     }
 }

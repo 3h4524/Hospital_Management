@@ -22,8 +22,9 @@ namespace View
         public MainWindow(AuthenticationService authenticationService)
         {
             InitializeComponent();
-            //MainContent.Content = new LoginView(authenticationService);
             MainContent.Content = new AppointmentBooking(App._serviceProvider.GetRequiredService<AppointmentBookingService>());
+            //MainContent.Content = new LoginView(authenticationService);
+            //MainContent.Content = new AppointmentBooking(App._serviceProvider.GetRequiredService<AppointmentBookingService>());
         }
     }
 }
