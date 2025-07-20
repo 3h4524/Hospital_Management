@@ -25,11 +25,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                            CornerRadius="6"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                                CornerRadius="6"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -113,8 +113,8 @@
                 Padding="20, 15">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
-                <TextBlock Text="Month" Grid.Row="1" Grid.Column="0" Margin="0,15,10,0" VerticalAlignment="Center"/>
-                <ComboBox x:Name="MonthComboBox" Grid.Row="1" Grid.Column="1" Margin="0,5" Width="200" SelectionChanged="MonthComboBox_SelectionChanged">
+                <TextBlock Text="Month" Margin="0,15,10,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="MonthComboBox" Margin="0,5" Width="200" SelectionChanged="MonthComboBox_SelectionChanged">
                     <ComboBoxItem Content="January"/>
                     <ComboBoxItem Content="February"/>
                     <ComboBoxItem Content="March"/>
@@ -144,7 +144,6 @@
                     <Setter Property="VerticalAlignment" Value="Center"/>
                 </Style>
             </DataGrid.Resources>
-
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Họ và tên" Binding="{Binding DoctorName}" Width="*" FontWeight="SemiBold"/>
                 <DataGridTextColumn Header="Số ngày làm" Binding="{Binding TotalDaysWorked}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
@@ -165,52 +164,47 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-
         </DataGrid>
 
         <Popup x:Name="ViewDetailReports" Placement="Center" AllowsTransparency="True" PopupAnimation="Fade">
-            <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Padding="15">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Padding="20">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
                 </Border.Effect>
-                <StackPanel Width="Auto">
-                    <DataGrid Grid.Row="0" 
-                              Style="{StaticResource BlueDataGridStyle}"
+                <StackPanel Width="600">
+                    <TextBlock FontSize="18" 
+                               FontWeight="Bold" 
+                               Margin="0,0,0,10"
+                               HorizontalAlignment="Center">
+                        <Run Text="Chi tiết lịch làm việc - "/>
+                        <Run Text="{Binding SelectedDoctorName}"/>
+                    </TextBlock>
+                    <DataGrid Style="{StaticResource BlueDataGridStyle}"
                               CellStyle="{StaticResource BlueDataGridCellStyle}"
                               ItemsSource="{Binding DailyScheduleReportResponses}"
                               ColumnHeaderStyle="{StaticResource HeaderCenterTextStyle}"
-                              Margin="0,0,0,0">
+                              Margin="0,0,0,10">
                         <DataGrid.Resources>
                             <Style x:Key="CenterTextStyle" TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
                                 <Setter Property="VerticalAlignment" Value="Center"/>
                             </Style>
                         </DataGrid.Resources>
-
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Tên bác sỹ" Binding="{Binding DoctorName}" Width="*" FontWeight="SemiBold"/>
                             <DataGridTextColumn Header="Ngày" Binding="{Binding WorkDate}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
                             <DataGridTextColumn Header="Số giờ làm" Binding="{Binding WorkingHours}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
                             <DataGridTextColumn Header="Số giờ đi trễ" Binding="{Binding LateHours}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
                             <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
-                            <DataGridTemplateColumn Header="Chi tiết" Width="120">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Xem chi tiết" 
-                                    Style="{StaticResource BlueButtonStyle}" 
-                                    Click="ViewDetailsButton_Click"
-                                    Margin="5"
-                                    Padding="10,5"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
-
                     </DataGrid>
-
+                    <Button Content="Đóng" 
+                            Style="{StaticResource BlueButtonStyle}" 
+                            Click="ClosePopupButton_Click"
+                            HorizontalAlignment="Right"
+                            Margin="0,10,0,0"
+                            Padding="15,8"/>
                 </StackPanel>
             </Border>
         </Popup>
-
     </Grid>
 </UserControl>

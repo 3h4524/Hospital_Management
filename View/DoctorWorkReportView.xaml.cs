@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using DTO.Response;
 using System.Collections.ObjectModel;
 using Service;
@@ -27,18 +15,17 @@ namespace View
         private ObservableCollection<DoctorScheduleReportResponse> _doctorScheduleReports;
         private int _selectedMonth;
         private ObservableCollection<DailyScheduleReportResponse> _dailyScheduleReportResponses;
+        private String _selectedDoctorName;
 
         public DoctorWorkReportView(WorkReportService workReportService)
         {
             InitializeComponent();
-
-
             _workReportService = workReportService;
-            _doctorScheduleReports = [];
+            _doctorScheduleReports = new ObservableCollection<DoctorScheduleReportResponse>();
+            _dailyScheduleReportResponses = new ObservableCollection<DailyScheduleReportResponse>();
             DataContext = this;
             _selectedMonth = DateTime.Now.Month;
             MonthComboBox.SelectedIndex = _selectedMonth - 1;
-
         }
 
         public ObservableCollection<DoctorScheduleReportResponse> DoctorScheduleReports
@@ -52,6 +39,13 @@ namespace View
             get => _dailyScheduleReportResponses;
             set => SetPropertyChanged(ref _dailyScheduleReportResponses, value);
         }
+
+        public string SelectedDoctorName
+        {
+            get => _selectedDoctorName;
+            set => SetPropertyChanged(ref _selectedDoctorName, value);
+        }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -67,11 +61,11 @@ namespace View
             OnPropertyChanged(propName);
             return true;
         }
+
         public async Task LoadScheduleReports()
         {
             var result = await _workReportService.GetDoctorScheduleReportsSoFar(_selectedMonth);
             DoctorScheduleReports = [.. result];
-
         }
 
         private async void MonthComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -84,11 +78,19 @@ namespace View
         {
             var button = sender as Button;
             DoctorScheduleReportResponse? report = button.DataContext as DoctorScheduleReportResponse;
+            if (report != null)
+            {
+                SelectedDoctorName = report.DoctorName;
+                var result = await _workReportService.GetDailyScheduleReportResponseSofarByDoctorId(report.DoctorId, _selectedMonth);
+                DailyScheduleReportResponses = [.. result];
+                Debug.WriteLine($"haha: {DailyScheduleReportResponses}");
+                ViewDetailReports.IsOpen = true;
+            }
+        }
 
-            var result = (await _workReportService.GetDailyScheduleReportResponseSofarByDoctorId(report.DoctorId, _selectedMonth)).ToList();
-            _dailyScheduleReportResponses = [.. result];
-
-            ViewDetailReports.IsOpen = true;
+        private void ClosePopupButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewDetailReports.IsOpen = false;
         }
     }
 }
