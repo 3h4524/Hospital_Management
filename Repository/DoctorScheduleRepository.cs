@@ -40,12 +40,12 @@ namespace Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<DoctorSchedule>> GetDoctorSchedulesByDoctorIdAndWorkDate(int userId, DateOnly today)
-        {
-            return await _dbSet
-                .Include(ds => ds.Doctor)
-                .Where(ds => ds.DoctorId == userId && ds.WorkDate == today)
-                .ToListAsync();
-        }
+        //public async Task<IEnumerable<DoctorSchedule>> GetDoctorSchedulesByDoctorIdAndWorkDate(int userId, DateOnly today)
+        //{
+        //    return await _dbSet
+        //        .Include(ds => ds.Doctor)
+        //        .Where(ds => ds.DoctorId == userId && ds.WorkDate == today)
+        //        .ToListAsync();
+        //}
     }
 }

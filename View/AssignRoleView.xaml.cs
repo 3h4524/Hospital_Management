@@ -24,14 +24,12 @@ namespace View
                 MessageTextBlock.Text = "Vui lòng chọn người dùng.";
                 return;
             }
-            // Tìm dòng đang chọn
             var row = (DataGridRow)UsersDataGrid.ItemContainerGenerator.ContainerFromItem(selectedUser);
             if (row == null)
             {
                 MessageTextBlock.Text = "Không thể xác định dòng dữ liệu.";
                 return;
             }
-            // Tìm ComboBox trong dòng đó
             var comboBox = FindVisualChild<ComboBox>(row, "RoleComboBox");
             if (comboBox == null || comboBox.SelectedItem == null)
             {
@@ -43,14 +41,12 @@ namespace View
             if (result)
             {
                 MessageTextBlock.Text = $"Đã gán vai trò '{selectedRole}' cho người dùng ID {selectedUser.UserId}.";
-                // Refresh lại danh sách user
                 UsersDataGrid.ItemsSource = null;
                 UsersDataGrid.ItemsSource = _userRoleService.GetAllUsers();
             }
             else
             {
                 MessageTextBlock.Text = "Gán vai trò thất bại. Vui lòng thử lại.";
-                // Đặt lại ComboBox về vai trò cũ
                 comboBox.SelectedItem = selectedUser.Role;
             }
         }

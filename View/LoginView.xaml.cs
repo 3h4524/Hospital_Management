@@ -59,19 +59,31 @@ namespace View
             {
                 Application.Current.Properties["CurrentUser"] = user;
 
-                if (user.Role == UserRole.Doctor.ToString())
-                {
-                    Window main = Window.GetWindow(this);
-                    main.Content = new DoctorSchedulesView(App._serviceProvider.GetRequiredService<DoctorScheduleService>());
+                //if (user.Role == UserRole.Doctor.ToString())
+                //{
+                //    Window main = Window.GetWindow(this);
+                //    main.Content = new DoctorSchedulesView(App._serviceProvider.GetRequiredService<DoctorScheduleService>());
 
-                } else if  (user.Role == UserRole.Admin.ToString())
-                {
-                    Window main = Window.GetWindow(this);
-                    main.Content = new AttendanceTrackingView(App._serviceProvider.GetRequiredService<AttendanceService>());
+                //}
+                //else if (user.Role == UserRole.Admin.ToString())
+                //{
+                //    Window main = Window.GetWindow(this);
+                //    main.Content = new AttendanceTrackingView(App._serviceProvider.GetRequiredService<AttendanceService>());
+
+                    if (user.Role == UserRole.Doctor.ToString())
+                    {
+                        Window main = Window.GetWindow(this);
+                        main.Content = new AttendanceTrackingView(App._serviceProvider.GetRequiredService<AttendanceService>());
+                    }
+                    else if (user.Role == UserRole.Admin.ToString())
+                    {
+                        Window main = Window.GetWindow(this);
+                        main.Content = new AssignRoleView(App._serviceProvider.GetRequiredService<UserRoleService>());
+                    }
 
                     //Window main = Window.GetWindow(this);
-                    //main.Content = new AssignRoleView(App._serviceProvider.GetRequiredService<UserRoleService>());
-                } else
+                    //main.Content = new AssignRoleView(App._serviceProvider.GetRequiredService<UserRoleService
+                else
                 {
 
                     MessageBox.Show("Hahaha Tao La Nhat", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
