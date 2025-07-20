@@ -15,12 +15,14 @@ namespace Service
         DoctorRepository _doctorRepository;
         DoctorScheduleRepository _doctorScheduleRepository;
         SystemUserRepository _systemUserRepository;
+        TimeKeepingRepository _timeKeepingRepository;
 
-        public AttendanceService(DoctorRepository doctorRepository, DoctorScheduleRepository doctorScheduleRepository, SystemUserRepository systemUserRepository)
+        public AttendanceService(DoctorRepository doctorRepository, DoctorScheduleRepository doctorScheduleRepository, SystemUserRepository systemUserRepository, TimeKeepingRepository timeKeepingRepository)
         {
             _doctorRepository = doctorRepository;
             _doctorScheduleRepository = doctorScheduleRepository;
             _systemUserRepository = systemUserRepository;
+            _timeKeepingRepository = timeKeepingRepository;
         }
 
         //public async List<DoctorScheduleReportResponse> Watch()
@@ -45,7 +47,7 @@ namespace Service
                     .Where(s => s.Status == "Working")
                     .Sum(s => (s.EndTime - s.StartTime).TotalHours);
 
-                List<Timekeeping> timekeepings = doctor.Timekeepings;
+                List<Timekeeping> timekeepings = (await _timeKeepingRepository.GetTimekeepingInCurrentMonthStatusLateByDoctorId(doctor.UserId)).ToList();
             }
 
         }

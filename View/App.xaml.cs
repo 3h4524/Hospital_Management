@@ -29,12 +29,16 @@ namespace View
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<DoctorScheduleRepository>();
                 services.AddScoped<DoctorRepository>();
-                services.AddScoped<AuthenticationService>();
-                services.AddScoped<EmailService>();
+                services.AddScoped<TimeKeepingRepository>();
+
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
+
+                services.AddScoped<AuthenticationService>();
+                services.AddScoped<EmailService>();
                 services.AddScoped<DoctorScheduleService>();
                 services.AddScoped<AttendanceService>();
+
                 _serviceProvider = services.BuildServiceProvider();
 
                 //var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
