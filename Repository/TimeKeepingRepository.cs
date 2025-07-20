@@ -13,20 +13,23 @@ namespace Repository
     {
         public TimeKeepingRepository(HospitalManagementContext context) : base(context) { }
 
-        public async Task<IEnumerable<Timekeeping>> GetTimekeepingInCurrentMonthStatusLateByDoctorId(int DoctorId)
+        public async Task<IEnumerable<Timekeeping>> GetTimekeepingStatusLateByDoctorIdByMonthSofar(int doctorId, int selectedMonth)
         {
-            var today = DateOnly.FromDateTime(DateTime.Today);
-            int currentMonth = today.Month;
+            var today = DateTime.Now;
             int currentYear = today.Year;
 
             return await _dbSet
                 .Include(t => t.User)
                 .Include(t => t.Schedule)
-                .Where(t => t.UserId == DoctorId)
-                .Where(t => t.WorkDate.Month == currentMonth && t.WorkDate.Year == currentYear)
-                .Where(t => t.Status == "Late")
+                .Where(t =>
+                    t.UserId == doctorId &&
+                    t.WorkDate.Month == selectedMonth &&
+                    t.WorkDate.Year == currentYear &&
+                    t.WorkDate <= DateOnly.FromDateTime(today) &&
+                    t.Status == "Late")
                 .ToListAsync();
         }
+
         public async Task<Timekeeping?> GetActiveTimeKeepingForUserAndDate(int userId, DateOnly date)
         {
             return await _context.Timekeepings
@@ -50,6 +53,14 @@ namespace Repository
         {
             return await _context.Timekeepings
                            .AnyAsync(t => t.UserId == userId && t.ScheduleId == scheduleId);
+        }
+
+        public async Task<IEnumerable<Timekeeping>> GetTimekeepingsForDate(int doctorId, DateOnly date)
+        {
+            return await _dbSet
+                .Include(t => t.Schedule)
+                .Where(t => t.WorkDate == date)
+                .ToListAsync();
         }
 
     }

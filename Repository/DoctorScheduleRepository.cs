@@ -11,12 +11,7 @@ namespace Repository
 {
     public class DoctorScheduleRepository : BaseRepository<DoctorSchedule>
     {
-        //private readonly HospitalManagementContext _context;
-
-        public DoctorScheduleRepository(HospitalManagementContext context) : base(context)
-        {
-            //_context = context;
-        }
+        public DoctorScheduleRepository(HospitalManagementContext context) : base(context) { }
 
 
         public async Task<IEnumerable<DoctorSchedule>> GetScheduleForDoctor(int DoctorId)
@@ -27,19 +22,21 @@ namespace Repository
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<DoctorSchedule>> GetScheduleForDoctorThisMonth(int doctorId)
+        public async Task<IEnumerable<DoctorSchedule>> GetScheduleForDoctorByMonthSofar(int doctorId, int selectedMonth)
         {
-            var today = DateTime.Today;
-            int currentMonth = today.Month;
+            DateTime today = DateTime.Today;
             int currentYear = today.Year;
 
             return await _dbSet
                 .Include(ds => ds.Doctor)
-                .Where(ds => ds.DoctorId == doctorId &&
-                             ds.WorkDate.Month == currentMonth &&
-                             ds.WorkDate.Year == currentYear)
+                .Where(ds =>
+                    ds.DoctorId == doctorId &&
+                    ds.WorkDate.Month == selectedMonth &&
+                    ds.WorkDate.Year == currentYear &&
+                    ds.WorkDate <= DateOnly.FromDateTime(today))
                 .ToListAsync();
         }
+
 
 
         public async Task<IEnumerable<DoctorSchedule>> GetDoctorSchedulesByMonth(int DoctorId, int month, int year)
@@ -60,6 +57,22 @@ namespace Repository
             return await _dbSet
                 .Include(ds => ds.Doctor)
                 .Where(ds => ds.DoctorId == userId && ds.WorkDate == today)
+                .ToListAsync();
+        }
+
+        public async Task<List<DateOnly>> GetWorkDatesForDoctorByMonthSofar(int doctorId, int selectedMonth)
+        {
+            DateTime today = DateTime.Today;
+            int currentYear = today.Year;
+
+            return await _dbSet
+                .Where(ds =>
+                    ds.DoctorId == doctorId &&
+                    ds.WorkDate.Month == selectedMonth &&
+                    ds.WorkDate.Year == currentYear &&
+                    ds.WorkDate <= DateOnly.FromDateTime(today))
+                .Select(ds => ds.WorkDate)
+                .Distinct()
                 .ToListAsync();
         }
     }

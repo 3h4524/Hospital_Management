@@ -30,6 +30,7 @@ namespace View
                 services.AddScoped<DoctorScheduleRepository>();
                 services.AddScoped<DoctorRepository>();
                 services.AddScoped<TimeKeepingRepository>();
+                services.AddScoped<RewardPenaltyRepository>();
 
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
@@ -42,6 +43,7 @@ namespace View
                 services.AddScoped<UserRoleService>();
                 services.AddScoped<DoctorScheduleService>();
                 services.AddScoped<AttendanceService>();
+                services.AddScoped<WorkReportService>();
 
                 _serviceProvider = services.BuildServiceProvider();
 

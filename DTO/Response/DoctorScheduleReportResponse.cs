@@ -14,16 +14,25 @@ namespace DTO.Response
 
         public int TotalDaysWorked { get; set; }
 
-        public Double TotalWorkingHours { get; set; }
+        public float TotalWorkingHours { get; set; }
 
-        public Double TotalLateHours { get; set; }
+        public float TotalLateHours { get; set; }
+
+        public int TotalDaysOff { get; set; }
+
+        public decimal TotalRewardAmount { get; set; }
+
+        public decimal TotalPenaltyAmount { get; set; }
 
         public override string ToString()
         {
             return $"Doctor ID: {DoctorId}, Name: {DoctorName}, " +
                    $"Total Days Worked: {TotalDaysWorked}, " +
                    $"Total Working Hours: {TotalWorkingHours:F2}, " +
-                   $"Total Late Hours: {TotalLateHours:F2}";
+                   $"Total Days Off: {TotalDaysOff}, " +
+                   $"Total Late Hours: {TotalLateHours:F2}" +
+                   $"Total Reward Amount: {TotalRewardAmount:F2}" +
+                   $"Total Penalty Amount: {TotalPenaltyAmount:F2}";
         }
 
     }

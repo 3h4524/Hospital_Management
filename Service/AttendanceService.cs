@@ -13,56 +13,11 @@ namespace Service
 {
     public class AttendanceService
     {
-        DoctorRepository _doctorRepository;
-        DoctorScheduleRepository _doctorScheduleRepository;
-        SystemUserRepository _systemUserRepository;
         TimeKeepingRepository _timeKeepingRepository;
 
-        public AttendanceService(DoctorRepository doctorRepository, DoctorScheduleRepository doctorScheduleRepository, SystemUserRepository systemUserRepository, TimeKeepingRepository timeKeepingRepository)
+        public AttendanceService(TimeKeepingRepository timeKeepingRepository)
         {
-            _doctorRepository = doctorRepository;
-            _doctorScheduleRepository = doctorScheduleRepository;
-            _systemUserRepository = systemUserRepository;
             _timeKeepingRepository = timeKeepingRepository;
-        }
-
-        public async Task<IEnumerable<DoctorScheduleReportResponse>> Watch()
-        {
-            List<DoctorScheduleReportResponse> result = new();
-            List<SystemUser> listDoctor = (await _systemUserRepository.Find(u => u.Role == "Doctor")).ToList();
-
-            foreach (var doctor in listDoctor)
-            {
-                Debug.WriteLine($"Doctor: {doctor.UserId}");
-
-                List<DoctorSchedule> schedules = (await _doctorScheduleRepository.GetScheduleForDoctorThisMonth(doctor.UserId)).ToList();
-
-                int TotalDaysWorked = schedules
-                     .GroupBy(s => s.WorkDate)
-                     .Count();
-
-                double TotalWorkingHours = schedules
-                    .Where(s => s.Status == "Working")
-                    .Sum(s => (s.EndTime - s.StartTime).TotalHours);
-
-                List<Timekeeping> timekeepings = (await _timeKeepingRepository.GetTimekeepingInCurrentMonthStatusLateByDoctorId(doctor.UserId)).ToList();
-
-                double TotalLateHours = timekeepings
-                    .Where(t => t.CheckInTime.HasValue && t.Schedule != null)
-                    .Sum(t => (t.CheckInTime.Value - t.Schedule.StartTime).TotalHours);
-
-                DoctorScheduleReportResponse response = new DoctorScheduleReportResponse
-                {
-                    DoctorId = doctor.UserId,
-                    DoctorName = doctor.FullName,
-                    TotalDaysWorked = TotalDaysWorked,
-                    TotalWorkingHours = TotalWorkingHours,
-                    TotalLateHours = TotalLateHours,
-                };
-
-                result.Add(response);
-            }
-            return result;
         }
 
 
@@ -75,7 +30,6 @@ namespace Service
         {
             return await _timeKeepingRepository.GetByUser(userId);
         }
-
 
         public async Task Add(Timekeeping timekeeping)
         {
