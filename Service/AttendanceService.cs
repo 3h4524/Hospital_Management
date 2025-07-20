@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
+using DTO.Response;
 using Model;
 using Repository;
 
@@ -25,8 +26,7 @@ namespace Service
             _timeKeepingRepository = timeKeepingRepository;
         }
 
-        //public async Task<IEnumerable<DoctorScheduleReportResponse>> Watch()
-        public async void Watch()
+        public async Task<IEnumerable<DoctorScheduleReportResponse>> Watch()
         {
             List<DoctorScheduleReportResponse> result = new();
             List<SystemUser> listDoctor = (await _systemUserRepository.Find(u => u.Role == "Doctor")).ToList();
@@ -62,8 +62,7 @@ namespace Service
 
                 result.Add(response);
             }
-
-            result.ForEach(a => Debug.WriteLine(a.ToString()));
+            return result;
         }
 
 
@@ -98,27 +97,5 @@ namespace Service
         {
             await _timeKeepingRepository.Update(timeKeeping);
         }
-    }
-
-    public class DoctorScheduleReportResponse()
-    {
-        public int DoctorId { get; set; }
-
-        public string DoctorName { get; set; }
-
-        public int TotalDaysWorked { get; set; }
-
-        public Double TotalWorkingHours { get; set; }
-
-        public Double TotalLateHours { get; set; }
-
-        public override string ToString()
-        {
-            return $"Doctor ID: {DoctorId}, Name: {DoctorName}, " +
-                   $"Total Days Worked: {TotalDaysWorked}, " +
-                   $"Total Working Hours: {TotalWorkingHours:F2}, " +
-                   $"Total Late Hours: {TotalLateHours:F2}";
-        }
-
     }
 }

@@ -35,6 +35,7 @@ namespace View
                 services.AddTransient<MainWindow>();
                 services.AddTransient<AttendanceTrackingView>();
                 services.AddTransient<AssignRoleView>();
+                services.AddTransient<DoctorWorkReportView>();
 
                 services.AddScoped<AuthenticationService>();
                 services.AddScoped<EmailService>();
@@ -48,11 +49,7 @@ namespace View
                 //var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
                 //navigateService.SetNavigateService(mainViewModel);
 
-                AttendanceService s = _serviceProvider.GetRequiredService<AttendanceService>();
-
-                s.Watch();
-
-                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<LoginView>());
+                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<LoginView>(), _serviceProvider.GetRequiredService<DoctorWorkReportView>());
                 MainWindow = mainWindow;
                 mainWindow.Show();
             }
