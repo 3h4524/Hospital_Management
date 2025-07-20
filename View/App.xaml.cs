@@ -33,9 +33,12 @@ namespace View
 
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
+                services.AddTransient<AttendanceTrackingView>();
+                services.AddTransient<AssignRoleView>();
 
                 services.AddScoped<AuthenticationService>();
                 services.AddScoped<EmailService>();
+                services.AddScoped<UserRoleService>();
                 services.AddScoped<DoctorScheduleService>();
                 services.AddScoped<AttendanceService>();
 

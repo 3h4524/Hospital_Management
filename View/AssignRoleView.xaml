@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="View.AssignRoleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Height="Auto" Width="Auto">
+    <Border Background="White" CornerRadius="8" Padding="25" Margin="20">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Nội dung chính -->
+            <StackPanel Orientation="Vertical" Margin="0" Grid.Row="0">
+                <TextBlock Text="Gán Vai Trò Người Dùng" FontSize="20" FontWeight="Bold" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" IsReadOnly="False" SelectionMode="Single"
+                          CanUserAddRows="False"
+                          Margin="0,0,0,10" Height="250" Background="#F9F9F9" BorderThickness="1" BorderBrush="Gray">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#F5F5F5"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="Padding" Value="5"/>
+                        </Style>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="Padding" Value="5"/>
+                        </Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Họ và tên" Binding="{Binding FullName}" Width="2*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="2*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Số điện thoại" Binding="{Binding PhoneNumber}" Width="2*" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Vai trò" Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox x:Name="RoleComboBox" SelectedItem="{Binding Role, UpdateSourceTrigger=PropertyChanged}"
+                                              Tag="{Binding UserId}">
+                                        <ComboBox.ItemsSource>
+                                            <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                                <sys:String>Admin</sys:String>
+                                                <sys:String>Receptionist</sys:String>
+                                                <sys:String>Doctor</sys:String>
+                                            </x:Array>
+                                        </ComboBox.ItemsSource>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <TextBlock x:Name="MessageTextBlock" Grid.Row="1" Margin="0,10,0,10" 
+                       HorizontalAlignment="Center" Foreground="Red" Text="" FontSize="14"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0" Grid.Row="2">
+                <Button Content="Gán vai trò" Click="AssignRoleButton_Click"
+                        Background="Black" Foreground="White" Width="120" Height="30" Padding="10,0" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
