@@ -18,4 +18,15 @@ public partial class DoctorSchedule
     public String Status { get; set; } = "Working";
 
     public virtual SystemUser Doctor { get; set; } = null!;
+
+    public override string ToString()
+    {
+        return $"ScheduleId: {ScheduleId}, " +
+               $"DoctorId: {DoctorId}, " +
+               $"WorkDate: {WorkDate:yyyy-MM-dd}, " +
+               $"StartTime: {StartTime:HH\\:mm}, " +
+               $"EndTime: {EndTime:HH\\:mm}, " +
+               $"Status: {Status}";
+    }
+
 }

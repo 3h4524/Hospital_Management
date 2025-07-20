@@ -28,18 +28,24 @@ namespace View
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<DoctorScheduleRepository>();
+                services.AddScoped<DoctorRepository>();
                 services.AddScoped<AuthenticationService>();
                 services.AddScoped<EmailService>();
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
                 services.AddScoped<DoctorScheduleService>();
+                services.AddScoped<AttendanceService>();
                 _serviceProvider = services.BuildServiceProvider();
 
                 //var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
                 //var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
                 //navigateService.SetNavigateService(mainViewModel);
 
-                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<AuthenticationService>());
+                AttendanceService s = _serviceProvider.GetRequiredService<AttendanceService>();
+
+                s.Watch();
+
+                var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<LoginView>());
                 MainWindow = mainWindow;
                 mainWindow.Show();
             }

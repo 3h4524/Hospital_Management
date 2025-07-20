@@ -27,6 +27,21 @@ namespace Repository
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<DoctorSchedule>> GetScheduleForDoctorThisMonth(int doctorId)
+        {
+            var today = DateTime.Today;
+            int currentMonth = today.Month;
+            int currentYear = today.Year;
+
+            return await _dbSet
+                .Include(ds => ds.Doctor)
+                .Where(ds => ds.DoctorId == doctorId &&
+                             ds.WorkDate.Month == currentMonth &&
+                             ds.WorkDate.Year == currentYear)
+                .ToListAsync();
+        }
+
+
         public async Task<IEnumerable<DoctorSchedule>> GetDoctorSchedulesByMonth(int DoctorId, int month, int year)
         {
             var startOfMonth = new DateOnly(year, month, 1);
