@@ -40,6 +40,16 @@ namespace Service
             return true;
         }
 
+        public async Task<IEnumerable<DoctorSchedule>> GetAllPendingDayOffRequests()
+        {
+            return await _doctorScheduleRepository.GetAllPendingDayOffRequests();
+        }
+
+        public async Task UpdateScheduleStatus(DoctorSchedule schedule)
+        {
+            await _doctorScheduleRepository.Update(schedule);
+        }
+
     }
 
 

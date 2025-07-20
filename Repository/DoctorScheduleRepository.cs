@@ -39,5 +39,12 @@ namespace Repository
                     && ds.WorkDate <= endOfMonth)
                 .ToListAsync();
         }
+        public async Task<IEnumerable<DoctorSchedule>> GetAllPendingDayOffRequests()
+        {
+            return await _dbSet
+                .Include(ds => ds.Doctor)
+                .Where(ds => ds.Status == "Pending")
+                .ToListAsync();
+        }
     }
 }

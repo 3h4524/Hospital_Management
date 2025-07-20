@@ -24,7 +24,7 @@ namespace View
 
                 var services = new ServiceCollection();
                 services.AddDbContext<HospitalManagementContext>(options =>
-                    options.UseSqlServer("Server=localhost,1433;Initial Catalog=Hospital_Management;User ID=sa;Password=3H452004hh@;TrustServerCertificate=True;"));
+                    options.UseSqlServer("Server=localhost,1433;Initial Catalog=Hospital_Management;User ID=sa;Password=1;TrustServerCertificate=True;"));
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<DoctorScheduleRepository>();
@@ -38,6 +38,7 @@ namespace View
                 //var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
                 //var navigateService = (NavigateService)_serviceProvider.GetRequiredService<INavigateService>();
                 //navigateService.SetNavigateService(mainViewModel);
+                
 
                 var mainWindow = new MainWindow(_serviceProvider.GetRequiredService<AuthenticationService>());
                 MainWindow = mainWindow;
