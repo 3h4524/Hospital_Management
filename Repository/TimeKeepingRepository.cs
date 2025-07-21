@@ -59,7 +59,8 @@ namespace Repository
         {
             return await _dbSet
                 .Include(t => t.Schedule)
-                .Where(t => t.WorkDate == date && t.Schedule.DoctorId == doctorId)
+                .Where(t => t.WorkDate == date && 
+                            t.Schedule.DoctorId == doctorId)
                 .ToListAsync();
         }
 

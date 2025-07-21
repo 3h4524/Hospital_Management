@@ -6,21 +6,26 @@ using Service;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using Model;
 
 namespace View
 {
     public partial class DoctorWorkReportView : UserControl, INotifyPropertyChanged
     {
         private WorkReportService _workReportService;
+        private UserRoleService _userRoleService;
+
         private ObservableCollection<DoctorScheduleReportResponse> _doctorScheduleReports;
         private int _selectedMonth;
         private ObservableCollection<DailyScheduleReportResponse> _dailyScheduleReportResponses;
-        private String _selectedDoctorName;
+        private SystemUser _selectedDoctor;
 
-        public DoctorWorkReportView(WorkReportService workReportService)
+
+        public DoctorWorkReportView(WorkReportService workReportService, UserRoleService userRoleService)
         {
             InitializeComponent();
             _workReportService = workReportService;
+            _userRoleService = userRoleService;
             _doctorScheduleReports = new ObservableCollection<DoctorScheduleReportResponse>();
             _dailyScheduleReportResponses = new ObservableCollection<DailyScheduleReportResponse>();
             DataContext = this;
@@ -40,10 +45,10 @@ namespace View
             set => SetPropertyChanged(ref _dailyScheduleReportResponses, value);
         }
 
-        public string SelectedDoctorName
+        public SystemUser SelectedDoctor
         {
-            get => _selectedDoctorName;
-            set => SetPropertyChanged(ref _selectedDoctorName, value);
+            get => _selectedDoctor;
+            set => SetPropertyChanged(ref _selectedDoctor, value);
         }
 
 
@@ -80,7 +85,7 @@ namespace View
             DoctorScheduleReportResponse? report = button.DataContext as DoctorScheduleReportResponse;
             if (report != null)
             {
-                SelectedDoctorName = report.DoctorName;
+                SelectedDoctor = await _userRoleService.GetUserById(report.DoctorId);
                 var result = await _workReportService.GetDailyScheduleReportResponseSofarByDoctorId(report.DoctorId, _selectedMonth);
                 DailyScheduleReportResponses = [.. result];
                 Debug.WriteLine($"haha: {DailyScheduleReportResponses}");
@@ -91,6 +96,36 @@ namespace View
         private void ClosePopupButton_Click(object sender, RoutedEventArgs e)
         {
             ViewDetailReports.IsOpen = false;
+        }
+
+        private void RewardPenaltyButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button?.Tag?.ToString() == "Reward") TypeComboBox.SelectedIndex = 0; else TypeComboBox.SelectedIndex = 1;
+
+            RewardPenaltyForm.Visibility = Visibility.Visible;
+        }
+
+        private void SaveRewardPenaltyButton_Click(object sender, RoutedEventArgs e)
+        {
+            RewardPenalty rp = new RewardPenalty
+            {
+                UserId = SelectedDoctor.UserId,
+                Rpdate = DateOnly.FromDateTime(RpDatePicker.SelectedDate ?? DateTime.Today),
+                Type = (TypeComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString(),
+                Amount = decimal.TryParse(AmountTextBox.Text, out var amount) ? amount : 0,
+                Reason = ReasonTextBox.Text
+
+            };
+
+            _workReportService.SaveRewardPenalty(rp);
+            RewardPenaltyForm.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelRewardPenaltyButton_Click(object sender, RoutedEventArgs e)
+        {
+            RewardPenaltyForm.Visibility = Visibility.Collapsed;
         }
     }
 }

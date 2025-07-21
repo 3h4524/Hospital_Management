@@ -27,5 +27,10 @@ namespace Service
         {
             return _userRepo.GetAllSystemUsers();
         }
+
+        public async Task<SystemUser> GetUserById(int userId)
+        {
+            return await _userRepo.FindByID(userId) ?? throw new ArgumentException("User not found");
+        }
     }
 }

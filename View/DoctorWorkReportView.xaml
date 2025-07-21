@@ -18,8 +18,8 @@
             <Setter Property="Background" Value="{StaticResource SecondaryBlueBrush}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="15,8"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="24,8"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -27,7 +27,9 @@
                         <Border Background="{TemplateBinding Background}" 
                                 CornerRadius="6"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+
                             <ContentPresenter HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -77,6 +79,7 @@
             <Setter Property="Padding" Value="12,10"/>
             <Setter Property="BorderBrush" Value="{StaticResource SecondaryBlueBrush}"/>
             <Setter Property="BorderThickness" Value="0,0,1,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
 
@@ -145,7 +148,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Họ và tên" Binding="{Binding DoctorName}" Width="*" FontWeight="SemiBold"/>
+                <DataGridTextColumn Header="Họ và tên" Binding="{Binding DoctorName}" Width="*" FontWeight="SemiBold" ElementStyle="{StaticResource CenterTextStyle}"/>
                 <DataGridTextColumn Header="Số ngày làm" Binding="{Binding TotalDaysWorked}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
                 <DataGridTextColumn Header="Số giờ làm" Binding="{Binding TotalWorkingHours}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
                 <DataGridTextColumn Header="Số giờ đi trễ" Binding="{Binding TotalLateHours}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
@@ -158,8 +161,7 @@
                             <Button Content="Xem chi tiết" 
                                     Style="{StaticResource BlueButtonStyle}" 
                                     Click="ViewDetailsButton_Click"
-                                    Margin="5"
-                                    Padding="10,5"/>
+                                    Margin="5"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -177,8 +179,24 @@
                                Margin="0,0,0,10"
                                HorizontalAlignment="Center">
                         <Run Text="Chi tiết lịch làm việc - "/>
-                        <Run Text="{Binding SelectedDoctorName}"/>
+                        <Run Text="{Binding SelectedDoctor.FullName}"/>
                     </TextBlock>
+
+                    <Border Grid.Row="1" Background="White" Padding="20, 15">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Thưởng" x:Name="RewardButton"
+                                Tag="Reward"
+                                Style="{StaticResource BlueButtonStyle}" 
+                                Margin="10,0"
+                                Click="RewardPenaltyButton_Click"/>
+                            <Button Content="Phạt" x:Name="PenaltyButton"
+                                Tag="Penalty"
+                                Style="{StaticResource BlueButtonStyle}" 
+                                Margin="10,0"
+                                Click="RewardPenaltyButton_Click"/>
+                        </StackPanel>
+                    </Border>
+
                     <DataGrid Style="{StaticResource BlueDataGridStyle}"
                               CellStyle="{StaticResource BlueDataGridCellStyle}"
                               ItemsSource="{Binding DailyScheduleReportResponses}"
@@ -197,12 +215,53 @@
                             <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" ElementStyle="{StaticResource CenterTextStyle}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <!-- Form for Reward/Penalty -->
+                    <StackPanel x:Name="RewardPenaltyForm" Visibility="Collapsed" Margin="0,10,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Type -->
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Loại:" Margin="0,0,10,5" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="TypeComboBox" Width="200" HorizontalAlignment="Left">
+                                <ComboBoxItem Content="Thưởng" Tag="Reward"/>
+                                <ComboBoxItem Content="Phạt" Tag="Penalty"/>
+                            </ComboBox>
+
+                            <!-- Amount -->
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Số tiền:" Margin="0,0,10,5" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="AmountTextBox" Width="200" HorizontalAlignment="Left" Margin="0,5"/>
+
+                            <!-- Reason -->
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Lý do:" Margin="0,0,10,5" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="ReasonTextBox" Width="400" HorizontalAlignment="Left" Margin="0,5" AcceptsReturn="True"/>
+
+                            <!-- Date -->
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Ngày:" Margin="0,0,10,5" VerticalAlignment="Center"/>
+                            <DatePicker Grid.Row="3" Grid.Column="1" x:Name="RpDatePicker" Width="200" HorizontalAlignment="Left" Style="{StaticResource BlueDatePickerStyle}" Margin="0,5"/>
+                        </Grid>
+
+                        <!-- Form Buttons -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button Content="Lưu" Style="{StaticResource BlueButtonStyle}" Click="SaveRewardPenaltyButton_Click" Margin="0,0,10,0"/>
+                            <Button Content="Hủy" Style="{StaticResource BlueButtonStyle}" Click="CancelRewardPenaltyButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
                     <Button Content="Đóng" 
                             Style="{StaticResource BlueButtonStyle}" 
                             Click="ClosePopupButton_Click"
                             HorizontalAlignment="Right"
-                            Margin="0,10,0,0"
-                            Padding="15,8"/>
+                            Margin="0,10,0,0"/>
                 </StackPanel>
             </Border>
         </Popup>

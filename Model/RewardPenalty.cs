@@ -9,7 +9,7 @@ public partial class RewardPenalty
 
     public int UserId { get; set; }
 
-    public DateOnly Rpdate { get; set; }
+    public DateOnly Rpdate { get; set; } = DateOnly.FromDateTime(DateTime.Today);
 
     public string? Type { get; set; }
 

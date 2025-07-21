@@ -137,7 +137,6 @@ namespace Service
                 DailyScheduleReportResponse reportResponse = new DailyScheduleReportResponse
                 {
                     DoctorId = doctorId,
-                    DoctorName = doctor.FullName,
                     WorkDate = date,
                     WorkingHours = workingHours,
                     LateHours = lateHours,
@@ -148,5 +147,9 @@ namespace Service
             return result;
         }
 
+        public void SaveRewardPenalty(RewardPenalty rp)
+        {
+            _rewardPenaltyRepository.Add(rp);
+        }
     }
 }

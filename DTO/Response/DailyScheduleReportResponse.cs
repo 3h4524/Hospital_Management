@@ -10,8 +10,6 @@ namespace DTO.Response
     {
         public int DoctorId { get; set; }
 
-        public string DoctorName { get; set; }
-
         public DateOnly WorkDate { get; set; }
 
         public float WorkingHours { get; set; }
@@ -22,7 +20,7 @@ namespace DTO.Response
 
         public override string ToString()
         {
-            return $"Doctor ID: {DoctorId}, Name: {DoctorName}, " +
+            return $"Doctor ID: {DoctorId}" +
                    $"Date: {WorkDate}" +
                    $"Working Hours: {WorkingHours:F2}, " +
                    $"Late Hours: {LateHours:F2}" +
