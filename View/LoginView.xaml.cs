@@ -62,16 +62,15 @@ namespace View
                 if (user.Role == UserRole.Doctor.ToString())
                 {
                     Window main = Window.GetWindow(this);
-                    main.Content = new DoctorSchedulesView(App._serviceProvider.GetRequiredService<DoctorScheduleService>());
-
-                } else if  (user.Role == UserRole.Admin.ToString())
+                    main.Content = new AttendanceTrackingView(App._serviceProvider.GetRequiredService<AttendanceService>());
+                }
+                else if (user.Role == UserRole.Admin.ToString())
                 {
                     Window main = Window.GetWindow(this);
-                    main.Content = new AttendanceTrackingView(App._serviceProvider.GetRequiredService<AttendanceService>());
+                    main.Content = new AssignRoleView(App._serviceProvider.GetRequiredService<UserRoleService>());
+                
 
-                    //Window main = Window.GetWindow(this);
-                    //main.Content = new AssignRoleView(App._serviceProvider.GetRequiredService<UserRoleService>());
-                } else
+            } else
                 {
 
                     MessageBox.Show("Hahaha Tao La Nhat", "Information", MessageBoxButton.OK, MessageBoxImage.Information);

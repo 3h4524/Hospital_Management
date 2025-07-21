@@ -48,9 +48,11 @@ namespace View
 
         private async void CheckInButton_Click(object sender, RoutedEventArgs e)
         {
-            var today = DateOnly.FromDateTime(DateTime.Now);
-            var checkInTime = TimeOnly.FromDateTime(DateTime.Now);
+            var now = DateTime.Now;
+            var today = DateOnly.FromDateTime(now);
+            var checkInTime = TimeOnly.FromDateTime(now);
             var checkOutTime = new TimeOnly(0, 0);
+
             var userId = user.UserId;
 
             var schedules = await _doctorScheduleService.GetDoctorSchedulesByDoctorIdAndWorkDate(userId, today);

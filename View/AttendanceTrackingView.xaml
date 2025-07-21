@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1400">
+             d:DesignHeight="600" d:DesignWidth="1400"
+             Background="#F4FAFF">
 
-    <Border Background="White" CornerRadius="8" Padding="25" Margin="20">
+    <Border Background="White" CornerRadius="12" Padding="24" Margin="24" BorderBrush="#3399FF" BorderThickness="1.5">
         <Border.Effect>
-            <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="#90CAF9"/>
         </Border.Effect>
 
         <Grid>
@@ -20,16 +21,49 @@
 
             <!-- Tiêu đề -->
             <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,20">
-                <TextBlock Text="Quản lý chấm công" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Path=User.FullName}" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
+                <TextBlock Text="Quản lý chấm công"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#007ACC"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Path=User.FullName}"
+                           FontSize="14"
+                           Foreground="Gray"
+                           HorizontalAlignment="Center"/>
             </StackPanel>
 
             <!-- Các nút chức năng -->
             <DockPanel Grid.Row="1" Margin="0,0,0,15">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                    <Button Content="Check-in" Width="100" Margin="5" Click="CheckInButton_Click"/>
-                    <Button Content="Check-out" Width="100" Margin="5" Click="CheckOutButton_Click"/>
-                    <Button Content="Làm mới" Width="100" Margin="5" Click="RefreshButton_Click"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button Content="Check-in"
+                            Click="CheckInButton_Click"
+                            Width="110"
+                            Background="#28A745"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            Padding="8,4"
+                            Cursor="Hand"
+                            BorderThickness="0"/>
+
+                    <Button Content="Check-out"
+                            Click="CheckOutButton_Click"
+                            Width="110"
+                            Background="#DC3545"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            Padding="8,4"
+                            Cursor="Hand"
+                            BorderThickness="0"/>
+
+                    <Button Content="Làm mới"
+                            Click="RefreshButton_Click"
+                            Width="110"
+                            Background="#007ACC"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            Padding="8,4"
+                            Cursor="Hand"
+                            BorderThickness="0"/>
                 </StackPanel>
             </DockPanel>
 
@@ -38,38 +72,40 @@
                       Grid.Row="2"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
-                      Background="#F9F9F9"
-                      BorderThickness="1"
-                      BorderBrush="Gray"
                       SelectionMode="Single"
                       CanUserAddRows="False"
                       HeadersVisibility="Column"
-                      VerticalScrollBarVisibility="Auto"
-                      RowHeight="35"
+                      Background="White"
+                      BorderBrush="#B3D7FF"
+                      BorderThickness="1"
+                      AlternatingRowBackground="#EAF6FF"
+                      RowBackground="White"
+                      RowHeight="38"
                       ColumnHeaderHeight="40"
                       FontSize="14">
 
                 <DataGrid.Resources>
+                    <!-- Header style -->
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#F5F5F5"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Background" Value="#007ACC"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
                         <Setter Property="FontSize" Value="16"/>
-                        <Setter Property="BorderThickness" Value="0,0,1,1"/>
-                        <Setter Property="BorderBrush" Value="Gray"/>
-                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Padding" Value="8,4"/>
+                        <Setter Property="BorderBrush" Value="#B3D7FF"/>
                     </Style>
+                    <!-- Cell style -->
                     <Style TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="0,0,1,1"/>
-                        <Setter Property="BorderBrush" Value="Gray"/>
-                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="BorderBrush" Value="#D0EAFD"/>
+                        <Setter Property="Padding" Value="6,2"/>
                     </Style>
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ngày" Binding="{Binding WorkDate}" Width="150"/>
-                    <DataGridTextColumn Header="Giờ vào" Binding="{Binding CheckInTime}" Width="150"/>
-                    <DataGridTextColumn Header="Giờ ra" Binding="{Binding CheckOutTime}" Width="150"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="200"/>
+                    <DataGridTextColumn Header="Ngày" Binding="{Binding WorkDate}" Width="*" />
+                    <DataGridTextColumn Header="Giờ vào" Binding="{Binding CheckInTime}" Width="*" />
+                    <DataGridTextColumn Header="Giờ ra" Binding="{Binding CheckOutTime}" Width="*" />
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
