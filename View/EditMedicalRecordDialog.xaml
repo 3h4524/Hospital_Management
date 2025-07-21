@@ -1,0 +1,51 @@
+<Window x:Class="View.EditMedicalRecordDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chỉnh sửa phiếu chỉ định" Height="500" Width="500"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0" Text="Chỉnh sửa phiếu chỉ định" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <!-- Patient Info -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,15">
+            <TextBlock Text="Thông tin bệnh nhân:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock x:Name="PatientInfoText" Text="Loading..." Foreground="Gray"/>
+        </StackPanel>
+
+        <!-- Diagnosis -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,15">
+            <TextBlock Text="Chẩn đoán:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="DiagnosisTextBox" Height="60" TextWrapping="Wrap" 
+                     AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
+                     Style="{StaticResource ModernTextBoxStyle}"/>
+        </StackPanel>
+
+        <!-- Notes -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,15">
+            <TextBlock Text="Ghi chú:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="NotesTextBox" Height="80" TextWrapping="Wrap" 
+                     AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
+                     Style="{StaticResource ModernTextBoxStyle}"/>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Hủy" 
+                    Width="80" Height="35" Margin="0,0,10,0" Click="Cancel_Click"
+                    Background="LightGray" Foreground="Black"/>
+            <Button Content="Update" 
+                    Width="80" Height="35" Click="Save_Click"
+                    Background="#1976D2" Foreground="White" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Window> 

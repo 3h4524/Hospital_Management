@@ -27,11 +27,14 @@ namespace Service
             Doctor
         }
 
-        public AuthenticationService(HospitalManagementContext context)
+        public AuthenticationService(
+            SystemUserRepository userRepository,
+            EmailPasswordResetRepository emailPasswordResetRepository,
+            EmailService emailService)
         {
-            _userRepository = new SystemUserRepository(context);
-            _emailPasswordResetRepository = new EmailPasswordResetRepository(context);
-            _emailService = new EmailService();
+            _userRepository = userRepository;
+            _emailPasswordResetRepository = emailPasswordResetRepository;
+            _emailService = emailService;
         }
 
         public async Task<SystemUser?> Login(String email, String password)

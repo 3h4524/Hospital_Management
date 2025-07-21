@@ -29,12 +29,25 @@ namespace View
                 services.AddScoped<SystemUserRepository>();
                 services.AddScoped<EmailPasswordResetRepository>();
                 services.AddScoped<DoctorScheduleRepository>();
+                services.AddScoped<AppointmentRepository>();
+                services.AddScoped<MedicalRecordRepository>();
+                services.AddScoped<SpecializationRepository>();
+                services.AddScoped<PatientRepository>();
                 services.AddScoped<AuthenticationService>();
                 services.AddScoped<EmailService>();
+                services.AddScoped<AppointmentService>();
+                services.AddScoped<MedicalRecordService>();
+                services.AddScoped<PatientService>();
+                services.AddScoped<DoctorScheduleService>();
                 services.AddTransient<LoginView>();
                 services.AddTransient<MainWindow>();
                 services.AddScoped<DoctorScheduleService>();
                 services.AddTransient<AdminDashboardView>();
+                services.AddTransient<ReceptionistDashboardView>();
+                services.AddTransient<CreateAppointmentView>();
+                services.AddTransient<DoctorDashboardView>();
+                services.AddTransient<CreateMedicalRecordView>();
+                services.AddTransient<MedicalRecordsView>();
                 _serviceProvider = services.BuildServiceProvider();
 
                 //var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();

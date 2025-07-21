@@ -28,6 +28,8 @@ public partial class HospitalManagementContext : DbContext
 
     public virtual DbSet<Patient> Patients { get; set; }
 
+    public virtual DbSet<Specialization> Specializations { get; set; }
+
     public virtual DbSet<RewardPenalty> RewardPenalties { get; set; }
 
     public virtual DbSet<Salary> Salaries { get; set; }
@@ -130,17 +132,29 @@ public partial class HospitalManagementContext : DbContext
 
             entity.Property(e => e.RecordId).HasColumnName("RecordID");
             entity.Property(e => e.AppointmentId).HasColumnName("AppointmentID");
+            entity.Property(e => e.SpecializationId).HasColumnName("SpecializationId");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Diagnosis).HasMaxLength(500);
             entity.Property(e => e.Notes).HasMaxLength(1000);
-            entity.Property(e => e.Prescription).HasMaxLength(500);
 
             entity.HasOne(d => d.Appointment).WithMany(p => p.MedicalRecords)
                 .HasForeignKey(d => d.AppointmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Record_Appointment");
+
+            entity.HasOne(d => d.Specialization).WithMany(p => p.MedicalRecords)
+                .HasForeignKey(d => d.SpecializationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_MedicalRecord_Specialization");
+        });
+
+        modelBuilder.Entity<Specialization>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Specialization");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Patient>(entity =>

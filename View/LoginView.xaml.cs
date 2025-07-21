@@ -57,11 +57,17 @@ namespace View
             {
                 Application.Current.Properties["CurrentUser"] = user;
 
+                // Debug: Hiển thị role thực tế
+                MessageBox.Show($"Debug: User role = '{user.Role}'", "Debug Info", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 if (user.Role == UserRole.Doctor.ToString())
                 {
                     Window main = Window.GetWindow(this);
-                    main.Content = new DoctorSchedulesView(App._serviceProvider.GetRequiredService<DoctorScheduleService>());
+                    main.Content = new DoctorDashboardView(
+                        App._serviceProvider.GetRequiredService<AppointmentService>(),
+                        App._serviceProvider.GetRequiredService<MedicalRecordService>());
 
+                    MessageBox.Show("Navigate to Doctor dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 } else if  (user.Role == UserRole.Admin.ToString())
                 {
 
@@ -69,10 +75,17 @@ namespace View
                     main.Content = App._serviceProvider.GetRequiredService<AdminDashboardView>();
 
                     MessageBox.Show("Navigate to Admin dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else if (user.Role == UserRole.Receptionist.ToString())
+                {
+                    Window main = Window.GetWindow(this);
+                    main.Content = new ReceptionistDashboardView(
+                        App._serviceProvider.GetRequiredService<AppointmentService>(),
+                        App._serviceProvider.GetRequiredService<PatientService>());
+                    
+                    MessageBox.Show("Navigate to Receptionist dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 } else
                 {
                     MessageBox.Show("Navigate to Other dashboard", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-
                 }
             }
         }
