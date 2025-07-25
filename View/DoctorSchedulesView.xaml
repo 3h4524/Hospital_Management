@@ -18,7 +18,7 @@
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderThickness" Value="0"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding HasWorkingSchedules}" Value="True">
+                <DataTrigger Binding="{Binding HasWorkingAndPendingSchedules}" Value="True">
                     <Setter Property="Background" Value="LightGreen"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding HasOffdSchedules}" Value="True">
@@ -111,29 +111,47 @@
                 </Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
                     <Border Background="LightGreen" Width="20" Height="20" Margin="5"/>
-                    <TextBlock Text="Available slots" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Working Day" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <Border Background="LightCoral" Width="20" Height="20" Margin="5"/>
-                    <TextBlock Text="Fully booked" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Absence Day" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <Border Background="Yellow" Width="20" Height="20" Margin="5"/>
-                    <TextBlock Text="Partially booked" VerticalAlignment="Center"/>
+                    <TextBlock Text="Half-day Absence" VerticalAlignment="Center"/>
                 </StackPanel>
+
             </StackPanel>
             <Popup x:Name="SchedulePopup" Placement="Center" AllowsTransparency="True" PopupAnimation="Fade">
                 <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="8" Padding="15">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="2" Color="Gray"/>
                     </Border.Effect>
-                    <StackPanel Width="300">
+                    <StackPanel Width="Auto">
                         <TextBlock x:Name="PopupDateTextBlock" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
                         <ItemsControl x:Name="PopupScheduleItemsControl" Margin="0,0,0,10">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="0,2">
-                                        <TextBlock Text="{Binding StartTime}" Width="80"/>
+                                        <TextBlock Text="{Binding Schedule.StartTime}" Width="80"/>
                                         <TextBlock Text="-" Margin="5,0"/>
-                                        <TextBlock Text="{Binding EndTime}" Width="80"/>
-                                        <TextBlock Text="{Binding Status}" Margin="5,0"/>
-                                        <Button Content="Request Off" Width="100" Margin="5,0" Click="RequestSessionOff_Click" Tag="{Binding Schedule}"/>
+                                        <TextBlock Text="{Binding Schedule.EndTime}" Width="80"/>
+                                        <TextBlock Text="{Binding Schedule.Status}" Margin="5,0"/>
+                                        <Button Content="Request Off" Width="100" Margin="5,0" Click="RequestSessionOff_Click" Tag="{Binding Schedule}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Schedule.Status}" Value="Working">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Schedule.Status}" Value="Pending">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Schedule.Status}" Value="Off">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

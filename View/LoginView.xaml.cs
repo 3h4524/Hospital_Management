@@ -63,7 +63,6 @@ namespace View
                 {
                     Window main = Window.GetWindow(this);
                     main.Content = new DoctorSchedulesView(App._serviceProvider.GetRequiredService<DoctorScheduleService>());
-
                 } else if  (user.Role == UserRole.Admin.ToString())
                 {
                     Window main = Window.GetWindow(this);

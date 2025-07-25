@@ -177,8 +177,6 @@ namespace View
                 PopupDateTextBlock.Text = $"{calendarDay.Day} {CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(_selectedMonth)}, {_selectedYear}";
                 var scheduleItems = calendarDay.Schedules.Select(s => new
                 {
-                    s.StartTime,
-                    s.EndTime,
                     Schedule = s
                 }).ToList();
                 PopupScheduleItemsControl.ItemsSource = scheduleItems;
@@ -246,9 +244,13 @@ namespace View
         public int Day { get; set; }
         public List<DoctorSchedule> Schedules { get; set; }
         public bool HasSchedules => Schedules != null && Schedules.Any();
-        public bool HasWorkingSchedules => Schedules.Any() && Schedules.All(s => s.Status == "Working");
+        public bool HasWorkingAndPendingSchedules =>
+                Schedules.Any() &&
+                !Schedules.Any(s => s.Status == "Off");
+
         public bool HasOffdSchedules => Schedules.Any() && Schedules.All(s => s.Status == "Off");
-        public bool HasMixedSchedules => Schedules.Any(s => s.Status == "Working") && Schedules.Any(s => s.Status == "Off") && Schedules.Any(s => s.Status == "Pending");
+        public bool HasMixedSchedules =>
+            Schedules.Any(s => s.Status == "Off") && Schedules.Any(s => s.Status == "Working" || s.Status == "Pending");
         public string ScheduleDetails => HasSchedules ? string.Join("\n", Schedules.Select(s => $"{s.StartTime} - {s.EndTime} ({(s.Status)})")) : "";
     }
 
